@@ -29,11 +29,11 @@ class ProductManager {
       });
       return maxID;
     }
-  
+  // FUNCION OBTENER PRODUCTOS
     getProducts() {
       return this.products;
     }
-  
+  // FUNCION PARA SELECCIONAR POR ID y MSJE SI NO ENCUENTRA
     getProductsbyID(id) {
       const idtempList = [];
       const msgNotFound = `There's no product with ${id} ID`;
