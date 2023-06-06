@@ -56,8 +56,8 @@ const add = new ProductManager();
 console.log("Get Products at beginning -->", add.getProducts());
 
 add.addProduct("Pepsi", "best soda ever", 1000, "SIN IMAGEN", "abc123", 25);
-add.addProduct("Tomato 1KG", "cheap", 800, "SIN IMAGEN", "abc1234", 50);
-add.addProduct("Gum2", "no sugar", 2000, "SIN IMAGEN", "abc12345", 80);
+add.addProduct("Coca-Cola", "cheap", 1100, "SIN IMAGEN", "abc1234", 50);
+add.addProduct("7-UP", "no sugar", 1000, "SIN IMAGEN", "abc12345", 80);
 
 // METODO GET PRODUCTS - TODOS
 console.log(
