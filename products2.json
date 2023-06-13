@@ -1,0 +1,40 @@
+[
+    [
+        {
+            "id": 1,
+            "title": "pepsi",
+            "description": "bebida",
+            "price": 1000,
+            "thumbnail": "ANY",
+            "code": "ab120",
+            "stock": 20
+        },
+        {
+            "id": 2,
+            "title": "7UP",
+            "description": "bebida",
+            "price": 900,
+            "thumbnail": "ANY",
+            "code": "ab100",
+            "stock": 30
+        },
+        {
+            "id": 3,
+            "title": "Pepsi",
+            "description": "bebida",
+            "price": 1000,
+            "thumbnail": "ANY",
+            "code": "ab101",
+            "stock": 30
+        },
+        {
+            "id": 4,
+            "title": "Crush",
+            "description": "bebida",
+            "price": 1100,
+            "thumbnail": "ANY",
+            "code": "ab102",
+            "stock": 30
+        }
+    ]
+]
