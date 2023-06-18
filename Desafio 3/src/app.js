@@ -36,6 +36,20 @@ app.get("/products/:productId", async (req, res) => {
   }
 });
 
+app.get("/search", async (req, res) => {
+  try {
+    const { id } = req.query;
+    const product = await prodManager.getProductByID(Number(id));
+    if (product) {
+      res.json(product);
+    } else {
+      res.status(400).json({ message: "Product not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 // // CREATE PRODUCT
 // app.post("/products", async (req, res) => {
 //   try {
