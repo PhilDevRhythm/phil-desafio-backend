@@ -78,7 +78,13 @@ export default class ProdManager {
       console.log(error);
     }
   }
+  async topLimit(limit) {
+    try {
+      const products = await this.getProducts();
+      const topProducts = products.slice(0, limit);
+      return topProducts;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
-
-
-

@@ -15,8 +15,14 @@ const prodManager = new ProdManager("./products.json");
 app.get("/products", async (req, res) => {
   //DECLARA ASYNC
   try {
-    const products = await prodManager.getProducts();
-    res.status(200).json(products);
+    const { limit } = req.query;
+    if (limit) {
+      const products = await prodManager.topLimit(limit);
+      res.status(200).json(products);
+    } else {
+      const products = await prodManager.getProducts();
+      res.status(200).json(products);
+    }
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
