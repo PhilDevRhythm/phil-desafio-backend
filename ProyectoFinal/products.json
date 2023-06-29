@@ -77,16 +77,7 @@
         "stock": 1000
     },
     {
-        "id": 12,
-        "description": "Ginger for drinks",
-        "code": "SW001",
-        "price": 500,
-        "status": true,
-        "stock": 1000,
-        "category": "Ginger",
-        "thumbnails": [
-            "../public/ginger.jpg",
-            "../public/ginger2.jpg"
-        ]
+        "quantity": 10,
+        "id": 12
     }
 ]

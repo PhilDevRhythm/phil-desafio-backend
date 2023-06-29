@@ -17,9 +17,9 @@ app.get("/products", async (req, res) => {
   try {
     const { limit } = req.query;
     if (limit) {
-      const products = await prodManager.topLimit(limit);
+      const products = await prodManager.topLimit(limit); //FUNCION PARA LIMITAR RESULTADOS
       res.status(200).json(products);
-    } else {
+    } else {s
       const products = await prodManager.getProducts();
       res.status(200).json(products);
     }
@@ -56,35 +56,35 @@ app.get("/search", async (req, res) => {
   }
 });
 
-// // CREATE PRODUCT
-// app.post("/products", async (req, res) => {
-//   try {
-//     const { name, description, price, stock } = req.body;
-//     const product = { name, description, price, stock };
-//     const newProduct = await prodManager.createProduct(product);
-//     res.json(newProduct);
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// });
-
-// app.put("/products/:productId", async (req, res) => {
-//   try {
-//     const product = req.body;
-//     const { productId } = req.params;
-//     const prodNumber = Number(productId);
-//     const productExist = await prodManager.getProductByID(prodNumber);
-//     if (productExist) {
-//       await prodManager.updateProduct(product, prodNumber);
-//       res.json({ message: `Product ${prodNumber} updated` });
-//     } else {
-//       res.status(400).json({ message: `ProductID ${prodNumber} not found` });
-//     }
-//   } catch (error) {
-//     console.log("thiswayS");
-//     res.status(500).json({ message: error.message}, "thiswayS");
-//   }
-// });
+// CREATE PRODUCT
+app.post("/products", async (req, res) => {
+  try {
+    const { name, description, price, stock } = req.body;
+    const product = { name, description, price, stock };
+    const newProduct = await prodManager.createProduct(product);
+    res.json(newProduct);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+//UPDATE PRODUCT
+app.put("/products/:productId", async (req, res) => {
+  try {
+    const product = req.body;
+    const { productId } = req.params;
+    const prodNumber = Number(productId);
+    const productExist = await prodManager.getProductByID(prodNumber);
+    if (productExist) {
+      await prodManager.updateProduct(product, prodNumber);
+      res.json({ message: `Product ${prodNumber} updated` });
+    } else {
+      res.status(400).json({ message: `ProductID ${prodNumber} not found` });
+    }
+  } catch (error) {
+    console.log("thiswayS");
+    res.status(500).json({ message: error.message}, "thiswayS");
+  }
+});
 
 // SERVER STATUS
 app.listen(8080, () => {
