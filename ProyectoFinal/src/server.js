@@ -13,16 +13,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
 // ERROR HANDLING
-app.use(errorHandler)
+app.use(errorHandler);
 
 //FROM ROUTES
 app.use("/api/products", prodRouter);
-app.use("/api/cart", cartRouter);
+app.use("/api/carts", cartRouter);
 app.use("/", prodRouter);
 
-const PORT = 8080
+const PORT = 8080;
 
 // app STATUS
-app.listen(8080, () => {
-  console.log("app is on 8080");
+app.listen(PORT, () => {
+  console.log(`app is on ${8080}`);
 });

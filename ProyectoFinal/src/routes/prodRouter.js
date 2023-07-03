@@ -1,8 +1,15 @@
 import { Router } from "express";
-import ProdManager from "../managers/prodManager.js";
+import {
+  createProduct,
+  getProductById,
+  getProducts,
+  getMaxID,
+  topLimit,
+  deleteProduct,
+  updateProduct,
+} from "../../../../Project/src/managers/prodManager.js";
 
 const router = Router();
-const prodManager = new ProdManager("./products.json");
 
 //GET ALL PRODUCTS
 
@@ -11,10 +18,10 @@ router.get("/", async (req, res) => {
   try {
     const { limit } = req.query;
     if (limit) {
-      const products = await prodManager.topLimit(limit); //FUNCION PARA LIMITAR RESULTADOS
+      const products = await topLimit(limit); //FUNCION PARA LIMITAR RESULTADOS
       res.status(200).json(products);
     } else {
-      const products = await prodManager.getProducts();
+      const products = await getProducts();
       res.status(200).json(products);
     }
   } catch (error) {
@@ -25,7 +32,7 @@ router.get("/", async (req, res) => {
 router.get("/:productId", async (req, res) => {
   try {
     const { productId } = req.params;
-    const product = await prodManager.getProductByID(Number(productId));
+    const product = await getProductById(Number(productId));
     if (product) {
       res.json(product);
     } else {
@@ -39,7 +46,7 @@ router.get("/:productId", async (req, res) => {
 router.get("/search", async (req, res) => {
   try {
     const { id } = req.query;
-    const product = await prodManager.getProductByID(Number(id));
+    const product = await getProductById(Number(id));
     if (product) {
       res.json(product);
     } else {
@@ -53,8 +60,16 @@ router.get("/search", async (req, res) => {
 // CREATE PRODUCT
 router.post("/", async (req, res) => {
   try {
-    const { name, description, code, price, status, stock, category, thumbnails } =
-      req.body;
+    const {
+      name,
+      description,
+      code,
+      price,
+      status,
+      stock,
+      category,
+      thumbnails,
+    } = req.body;
     const product = {
       name,
       description,
@@ -65,7 +80,7 @@ router.post("/", async (req, res) => {
       category,
       thumbnails,
     };
-    const newProduct = await prodManager.createProduct(product);
+    const newProduct = await createProduct(product);
     res.json(newProduct);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -78,9 +93,9 @@ router.put("/:productId", async (req, res) => {
     const product = req.body;
     const { productId } = req.params;
     const prodNumber = Number(productId);
-    const productExist = await prodManager.getProductByID(prodNumber);
+    const productExist = await getProductById(prodNumber);
     if (productExist) {
-      await prodManager.updateProduct(prodNumber, product);
+      await updateProduct(prodNumber, product);
       res.json({ message: `Product ${prodNumber} updated` });
     } else {
       res.status(400).json({ message: `ProductID ${prodNumber} not found` });
@@ -96,9 +111,9 @@ router.delete("/:productId", async (req, res) => {
     const product = req.body;
     const { productId } = req.params;
     const prodNumber = Number(productId);
-    const productExist = await prodManager.getProductByID(prodNumber);
+    const productExist = await getProductById(prodNumber);
     if (productExist) {
-      await prodManager.deleteProduct(prodNumber);
+      await deleteProduct(prodNumber);
       res.json({ message: `Product ${prodNumber} has beeen removed` });
     } else {
       res.status(400).json({ message: `ProductID ${prodNumber} not found` });

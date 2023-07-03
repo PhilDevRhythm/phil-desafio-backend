@@ -1,36 +1,80 @@
 import { Router } from "express";
-import CartManager from "../managers/cartManager.js";
+import {
+  getCarts,
+  getCartById,
+  saveProdtoCart,
+  createCart,
+  deleteCart,
+} from "../managers/cartManager.js";
+import { getProductById } from "../managers/prodManager.js";
 const router = Router();
 
-const cart = [];
-
-const cartManager = new CartManager("./cart.json");
-
+// GET CARTS
 router.get("/", async (req, res) => {
   try {
-    const { limit } = req.query;
-    if (limit) {
-      const cartGroup = await cartManager.topLimit(limit); //FUNCION PARA LIMITAR RESULTADOS
+    const cartGroup = await getCarts();
+    if (cartGroup) {
       res.status(200).json(cartGroup);
     } else {
-      const cartGroup = await cartManager.getCart();
-      res.status(200).json(cartGroup);
+      res.json("There are no Carts available");
     }
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
-// CREATE CART
-router.post("/", (req, res) => {
-  const cartItem = req.body;
-  cart.push(cartItem);
-  res.status(200).json(cartItem);
+// GET CART by ID
+
+router.get("/:cartId", async (req, res) => {
+  try {
+    const { cartId } = req.params;
+    const cart = await getCartById(Number(cartId));
+    if (cart) {
+      res.status(200).json(cart);
+    } else {
+      res.status(400).send({ msg: `Cart id ${cid} does not exist` });
+    }
+  } catch (error) {
+    res.status(500).send({ msg: error.message });
+  }
 });
 
-router.post("/:idCart/product/:idProduct", (req, res) => {
-  const idCart = req.params.idCart;
-  const idProduct = req.params.idProduct;
+// CREATE CART
+router.post("/", async (req, res) => {
+  try {
+    const newCart = await createCart();
+    res.status(200).json(newCart);
+  } catch (error) {}
+});
+
+// CREAR OBJETO EN CART
+router.post("/:idCart/product/:idProduct", async (req, res) => {
+  try {
+    const { CartId, ProductId } = req.params;
+    const cart = await getCartById(CartId);
+    const product = await getProductById(ProductId);
+    saveProdtoCart(cart, product);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// REMOVER CART
+
+router.delete("/:cartId", async (req, res) => {
+  try {
+    const { cartId } = req.params;
+    if (cartId) {
+      await deleteCart(Number(cartId));
+      res
+        .status(200)
+        .json({ message: `Cart ${Number(cartId)} deleted successfully` });
+    } else {
+      res.status(404).json({ message: "Cart wasn´t found" });
+    }
+  } catch (error) {
+    error.message = "error on code";
+  }
 });
 
 export default router;
