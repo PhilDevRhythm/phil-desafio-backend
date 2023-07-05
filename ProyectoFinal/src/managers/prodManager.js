@@ -1,4 +1,4 @@
-import fs, { accessSync } from "fs";
+import fs from "fs";
 import { __dirname } from "../utils.js";
 
 const pathFile = __dirname + "/db/products.json";
