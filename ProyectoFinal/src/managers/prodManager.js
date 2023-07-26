@@ -1,7 +1,7 @@
 import fs from "fs";
 import { __dirname } from "../utils.js";
 
-const pathFile = __dirname + "/db/products.json";
+const pathFile = __dirname + "./db/products.json";
 
 export const createProduct = async (obj) => {
   try {

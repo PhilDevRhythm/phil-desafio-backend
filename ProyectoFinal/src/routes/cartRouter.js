@@ -59,6 +59,28 @@ router.post("/:idCart/product/:idProduct", async (req, res) => {
   }
 });
 
+// REMOVER OBJETO EN CART
+
+router.delete("/:idCart/product/:idProduct", async (req, res) => {
+  try {
+  } catch (error) {}
+});
+
+// ACTUALIZAR UN SOLO OBJETO DEL CART Y SOLO LA CANTIDAD
+
+router.put("/:idCart", async (req, res) => {
+  try {
+  } catch (error) {}
+});
+
+// ELIMINAR TODOS LOS PRODUCTOS DEL CART
+
+router.delete("/:idCart", async (req, res) => {
+  try {
+  } catch (error) {}
+});
+
+
 // REMOVER CART
 
 router.delete("/:cartId", async (req, res) => {
