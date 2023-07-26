@@ -7,7 +7,7 @@ import {
   topLimit,
   deleteProduct,
   updateProduct,
-} from "../../../../Project/src/managers/prodManager.js";
+} from "../managers/prodManager.js";
 
 const router = Router();
 
@@ -43,19 +43,19 @@ router.get("/:productId", async (req, res) => {
   }
 });
 
-router.get("/search", async (req, res) => {
-  try {
-    const { id } = req.query;
-    const product = await getProductById(Number(id));
-    if (product) {
-      res.json(product);
-    } else {
-      res.status(400).json({ message: "Product not found" });
-    }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+// router.get("/search", async (req, res) => {
+//   try {
+//     const { id } = req.query;
+//     const product = await getProductById(Number(id));
+//     if (product) {
+//       res.json(product);
+//     } else {
+//       res.status(400).json({ message: "Product not found" });
+//     }
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// });
 
 // CREATE PRODUCT
 router.post("/", async (req, res) => {
