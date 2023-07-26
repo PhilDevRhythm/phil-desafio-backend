@@ -1,83 +1,83 @@
 [
-    {
-        "id": 1,
-        "name": "7up",
-        "description": "Feel the flavour",
-        "price": 450,
-        "stock": 1000
-    },
-    {
-        "id": 2,
-        "name": "7up",
-        "description": "Feel the flavour",
-        "price": 450,
-        "stock": 500
-    },
-    {
-        "id": 3,
-        "name": "Mirinda",
-        "description": "Feel the Orange",
-        "price": 450,
-        "stock": 300
-    },
-    {
-        "id": 4,
-        "name": "Crush",
-        "description": "Feel the Tangerin",
-        "price": 450,
-        "stock": 500
-    },
-    {
-        "id": 5,
-        "name": "Bilz",
-        "description": "Feel the Berries",
-        "price": 450,
-        "stock": 550
-    },
-    {
-        "id": 6,
-        "name": "Pap",
-        "description": "Feel the papaya",
-        "price": 450,
-        "stock": 560
-    },
-    {
-        "id": 7,
-        "name": "Kem",
-        "description": "Feel the pinapple",
-        "price": 450,
-        "stock": 200
-    },
-    {
-        "id": 8,
-        "name": "Pepsi Light",
-        "description": "Feel no sugarness",
-        "price": 450,
-        "stock": 1000
-    },
-    {
-        "id": 9,
-        "name": "Bilz Zero",
-        "description": "Feel no fruity sugarness",
-        "price": 450,
-        "stock": 300
-    },
-    {
-        "id": 10,
-        "name": "Kem Zero",
-        "description": "Feel no fruity sugarness",
-        "price": 450,
-        "stock": 200
-    },
-    {
-        "id": 11,
-        "name": "Kem Light",
-        "description": "Feel no fruity sugarness",
-        "price": 450,
-        "stock": 1000
-    },
-    {
-        "quantity": 10,
-        "id": 12
-    }
+  {
+    "id": 1,
+    "name": "7up",
+    "description": "Feel the flavour",
+    "price": 450,
+    "stock": 1000
+  },
+  {
+    "id": 2,
+    "name": "7up",
+    "description": "Feel the flavour",
+    "price": 450,
+    "stock": 500
+  },
+  {
+    "id": 3,
+    "name": "Mirinda",
+    "description": "Feel the Orange",
+    "price": 450,
+    "stock": 300
+  },
+  {
+    "id": 4,
+    "name": "Crush",
+    "description": "Feel the Tangerin",
+    "price": 450,
+    "stock": 500
+  },
+  {
+    "id": 5,
+    "name": "Bilz",
+    "description": "Feel the Berries",
+    "price": 450,
+    "stock": 550
+  },
+  {
+    "id": 6,
+    "name": "Pap",
+    "description": "Feel the papaya",
+    "price": 450,
+    "stock": 560
+  },
+  {
+    "id": 7,
+    "name": "Kem",
+    "description": "Feel the pinapple",
+    "price": 450,
+    "stock": 200
+  },
+  {
+    "id": 8,
+    "name": "Pepsi Light",
+    "description": "Feel no sugarness",
+    "price": 450,
+    "stock": 1000
+  },
+  {
+    "id": 9,
+    "name": "Bilz Zero",
+    "description": "Feel no fruity sugarness",
+    "price": 450,
+    "stock": 300
+  },
+  {
+    "id": 10,
+    "name": "Kem Zero",
+    "description": "Feel no fruity sugarness",
+    "price": 450,
+    "stock": 200
+  },
+  {
+    "id": 11,
+    "name": "Kem Light",
+    "description": "Feel no fruity sugarness",
+    "price": 450,
+    "stock": 1000
+  },
+  {
+    "quantity": 10,
+    "id": 12
+  }
 ]
