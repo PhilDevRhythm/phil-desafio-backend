@@ -8,7 +8,6 @@ import morgan from "morgan";
 import "./daos/mongodb/connection.js";
 
 const app = express();
-const products = [];
 // SOCKET.IO
 
 // import { Server } from "socket.io";
@@ -47,7 +46,7 @@ app.use("/api/products", prodRouter);
 
 // app STATUS
 app.listen(8080, () => {
-  console.log(`app is on ${8080}`);
+  console.log(`app is on 8080`);
 });
 
 // SOCKET 

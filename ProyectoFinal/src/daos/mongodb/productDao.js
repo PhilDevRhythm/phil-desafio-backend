@@ -1,6 +1,7 @@
 import { ProductModel } from "./model/productModel.js";
+import mongoose from "mongoose";
 
-export default class ProductDao {
+export default class productDaoMongoDB {
   async getAll() {
     try {
       const response = await ProductModel.find({});

@@ -80,7 +80,6 @@ router.delete("/:idCart", async (req, res) => {
   } catch (error) {}
 });
 
-
 // REMOVER CART
 
 router.delete("/:cartId", async (req, res) => {

@@ -4,14 +4,14 @@ import * as controller from "../controllers/productController.js";
 const router = Router();
 
 //GET ALL PRODUCTS
-router.get("/", controller.getAll);
+router.get("/", controller.getAllCtl);
 // GET PRODUCT BY ID
-router.get("/:productId", controller.getById);
+router.get("/:productId", controller.getByIdCtl);
 // CREATE PRODUCT
-router.post("/", controller.create);
+router.post("/", controller.createCtl);
 //UPDATE PRODUCT
-router.put("/:productId", controller.update);
+router.put("/:productId", controller.updateCtl);
 // DELETE PRODUCT
-router.delete("/:productId", controller.remove);
+router.delete("/:productId", controller.removeCtl);
 
 export default router;
