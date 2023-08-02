@@ -1,9 +1,9 @@
 import express from "express";
 import { errorHandler } from "./middlewares/errorHandler.js";
-// import { __dirname } from "./utils.js";
+import { __dirname } from "./utils.js";
 import prodRouter from "./routes/prodRouter.js";
-// import cartRouter from "./routes/cartRouter.js";
-// import viewsRouter from "./routes/viewsRouter.js";
+import cartRouter from "./routes/cartRouter.js";
+import viewsRouter from "./routes/viewsRouter.js";
 import morgan from "morgan";
 import "./daos/mongodb/connection.js";
 
@@ -21,13 +21,16 @@ const app = express();
 
 //   ;
 // });
+
 // HANDLEBARS CONFIGURATION
 
-// import handlebars from "express-handlebars";
+import handlebars from "express-handlebars";
 
-// app.engine("handlebars", handlebars.engine());
-// app.set("views", __dirname + "/views");
-// app.set("view engine", "handlebars");
+app.engine("handlebars", handlebars.engine());
+app.set("views", __dirname + "/views");
+app.set("view engine", "handlebars");
+
+
 
 // app.use("/", viewsRouter);
 
@@ -42,14 +45,15 @@ app.use(morgan("dev"));
 
 //FROM ROUTES
 app.use("/api/products", prodRouter);
-// app.use("/api/carts", cartRouter);
+app.use("/", viewsRouter);
+app.use("/api/carts", cartRouter);
 
 // app STATUS
 app.listen(8080, () => {
   console.log(`app is on 8080`);
 });
 
-// SOCKET 
+// SOCKET
 
 // const socketServer = new Server(httpServer);
 

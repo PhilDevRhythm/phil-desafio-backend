@@ -2,67 +2,89 @@
     {
         "name": "7up",
         "description": "Feel the flavour",
+        "category": "Lemon",
         "price": 450,
-        "stock": 1000
+        "stock": 1000,
+        "status": true
     },
     {
         "name": "7up",
         "description": "Feel the flavour",
+        "category": "Lemon",
         "price": 450,
-        "stock": 500
+        "stock": 500,
+        "status": true
     },
     {
         "name": "Mirinda",
         "description": "Feel the Orange",
+        "category": "Orange",
         "price": 450,
-        "stock": 300
+        "stock": 300,
+        "status": true
     },
     {
         "name": "Crush",
         "description": "Feel the Tangerin",
+        "category": "Orange",
         "price": 450,
-        "stock": 500
+        "stock": 500,
+        "status": true
     },
     {
         "name": "Bilz",
         "description": "Feel the Berries",
+        "category": "Berries",
         "price": 450,
-        "stock": 550
+        "stock": 550,
+        "status": true
     },
     {
         "name": "Pap",
         "description": "Feel the papaya",
+        "category": "Papaya",
         "price": 450,
-        "stock": 560
+        "stock": 560,
+        "status": true
     },
     {
         "name": "Kem",
         "description": "Feel the pinapple",
+        "category": "Pinnapple",
         "price": 450,
-        "stock": 200
+        "stock": 200,
+        "status": true
     },
     {
         "name": "Pepsi Light",
         "description": "Feel no sugarness",
+        "category": "Caramel",
         "price": 450,
-        "stock": 1000
+        "stock": 1000,
+        "status": true
     },
     {
         "name": "Bilz Zero",
         "description": "Feel no fruity sugarness",
+        "category": "Berries",
         "price": 450,
-        "stock": 300
+        "stock": 300,
+        "status": true
     },
     {
         "name": "Kem Zero",
         "description": "Feel no fruity sugarness",
+        "category": "Pinnapple",
         "price": 450,
-        "stock": 200
+        "stock": 200,
+        "status": true
     },
     {
         "name": "Kem Light",
         "description": "Feel no fruity sugarness",
+        "category": "Pinnapple",
         "price": 450,
-        "stock": 1000
+        "stock": 1000,
+        "status": true
     }
 ]
