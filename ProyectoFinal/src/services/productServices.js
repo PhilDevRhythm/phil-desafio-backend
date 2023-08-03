@@ -50,13 +50,13 @@ export const erase = async (id) => {
   }
 };
 
-export const getAllPaginated = async (attributes) => {
+export const getAllProdWithPages = async (page, limit) => {
   try {
-    const response = await productDao.getAllPaginated(attributes);
+    const response = await productDao.getAllProdWithPages(page, limit);
 
     const result = {
-      payload: response.docs,
       status: "success",
+      payload: response.docs,
       page: response.page,
       totalPages: response.totalPages,
       prevPage: response.prevPage,
@@ -64,10 +64,10 @@ export const getAllPaginated = async (attributes) => {
       hasPrevPage: response.hasPrevPage,
       hasNextPage: response.hasNextPage,
       prevLink: response.hasPrevPage
-        ? `http://localhost:8080/views/products?page=${response.prevPage}`
+        ? `http://localhost:8080/api/products?page=${response.prevPage}`
         : null,
       nextLink: response.hasNextPage
-        ? `http://localhost:8080/views/products?page=${response.nextPage}`
+        ? `http://localhost:8080/api/products?page=${response.nextPage}`
         : null,
     };
 

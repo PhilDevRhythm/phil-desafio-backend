@@ -44,28 +44,20 @@ export default class productDaoMongoDB {
       console.log(error);
     }
   }
-  async getAllPaginated({
-    limit = 10,
+  async getAllProdWithPages({
+    limit = 2,
     sortOrder = "asc",
-    category = null,
     page = 1,
-    available = null,
   } = {}) {
     try {
-      const query = {
-        ...(category !== null && { category: { $eq: category } }),
-        ...(available !== null && {
-          stock: { ...(available ? { $gt: 0 } : { $eq: 0 }) },
-        }),
-      };
-
-      console.log(query);
-
-      const response = await productModel.paginate(query, {
-        page,
-        limit,
-        sort: { price: sortOrder },
-      });
+      const response = await productModel.paginate(
+        {},
+        {
+          page,
+          limit,
+          sort: { price: sortOrder },
+        }
+      );
 
       return response;
     } catch (error) {

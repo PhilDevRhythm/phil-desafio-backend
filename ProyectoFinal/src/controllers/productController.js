@@ -1,17 +1,16 @@
 import * as service from "../services/productServices.js";
-import { convBoolean } from "../utils.js";
+
 
 export const getAllCtl = async (req, res, next) => {
   try {
-    const { limit, category, page, sort, available } = req.query;
-    const response = await service.getAllPaginated({
+    const { limit, page, sort} = req.query;
+    const response = await service.getAllProdWithPages({ 
       limit,
-      category,
       page,
       sort,
-      available: convBoolean(available),
     });
-    res.status(200).json(response);
+    // DIRECCIONADO a SERVICIOS
+    res.status(200).json({response}); 
   } catch (error) {
     next(error.message);
   }

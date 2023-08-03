@@ -45,7 +45,7 @@ app.use(morgan("dev"));
 
 //FROM ROUTES
 app.use("/api/products", prodRouter);
-app.use("/", viewsRouter);
+app.use("/products", viewsRouter);
 app.use("/api/carts", cartRouter);
 
 // app STATUS
