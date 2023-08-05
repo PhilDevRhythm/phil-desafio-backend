@@ -1,6 +1,6 @@
 // CONEXION A WEBSOCKET
 
-const socketClient = io();
+// const socketClient = io();
 
 // CONEXION AL DOM
 const form = document.getElementById("form");
@@ -21,10 +21,10 @@ form.onsubmit = (e) => {
 
 // IMPRIMIR MEDIANTE WEBSOCKET
 
-socketClient.on("prodList", async (prods) => {
-  let productData = "";
-  prods.forEach((product) => {
-    productData += `${product.name} - ${product.price} - ${product.stock} </br>`;
-  });
-  products.innerHTML = productData;
-});
+// socketClient.on("prodList", async (prods) => {
+//   let productData = "";
+//   prods.forEach((product) => {
+//     productData += `${product.name} - ${product.price} - ${product.stock} </br>`;
+//   });
+//   products.innerHTML = productData;
+// });
