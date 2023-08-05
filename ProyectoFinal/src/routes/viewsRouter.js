@@ -5,7 +5,7 @@ import * as cartService from "../services/cartServices.js";
 
 const router = Router();
 
-router.get("/", async (req, res) => {
+router.get("/products", async (req, res) => {
   try {
     const { page } = req.query;
     const {
@@ -40,14 +40,14 @@ router.get("/", async (req, res) => {
 router.get("/:cartId", async (req, res) => {
   try {
     const { id } = req.params;
-    console.log({ id });
+    
     const cart = await cartService.getById(id);
     const flatItems = cart.items.map((item) => ({
       ...item.toObject(),
       totalPrice: item.product.price * item.quantity,
     }));
-    console.log(flatItems);
-    res.render("carts", { items: flatItems, id: cart._id });
+
+    res.render("cart", { items: flatItems, id: cart._id });
   } catch (error) {
     res.render("error", { message: "Cart not found" });
   }

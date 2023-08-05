@@ -15,7 +15,7 @@ export const getAll = async () => {
 export const getById = async (id) => {
   try {
     const cart = await cartDao.getById(id);
-    return cart || false;
+    return cart;
   } catch (error) {
     console.log(error);
   }

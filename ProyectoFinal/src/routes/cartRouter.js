@@ -4,7 +4,7 @@ import * as controller from "../controllers/cartController.js";
 const router = Router();
 
 router.get("/", controller.getAll);
-router.get("/:cartId", controller.getById);
+router.get("/:id", controller.getById);
 router.post("/", controller.create);
 router.post("/:cartId/product/:productId", controller.addProductToCart);
 router.put("/:cartId", controller.updateCartItems);

@@ -13,7 +13,7 @@ export const getAll = async () => {
 export const getById = async (id) => {
   try {
     const cart = await cartModel.findById(id).populate("items.product");
-    return cart || false;
+    return cart;
   } catch (error) {
     console.log(error);
   }
