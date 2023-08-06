@@ -34,8 +34,8 @@ export const create = async (req, res, next) => {
 
 export const addProductToCart = async (req, res, next) => {
   try {
-    const { id, productId } = req.params;
-    const cart = await service.addProductToCart(id, productId);
+    const { cartId, productId } = req.params;
+    const cart = await service.addProductToCart(cartId, productId);
 
     if (cart) {
       res.status(200).json(cart);
@@ -49,8 +49,8 @@ export const addProductToCart = async (req, res, next) => {
 
 export const removeProductFromCart = async (req, res, next) => {
   try {
-    const { id, productId } = req.params;
-    const cart = await service.removeProductFromCart(id, productId);
+    const { cartId, productId } = req.params;
+    const cart = await service.removeProductFromCart(cartId, productId);
 
     if (cart) {
       res.status(200).json(cart);
@@ -100,8 +100,8 @@ export const updateProductQuantity = async (req, res, next) => {
 
 export const removeProducts = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const cart = await service.removeProducts(id);
+    const { cartId } = req.params;
+    const cart = await service.removeProducts(cartId);
 
     if (cart) {
       res.status(200).json(cart);

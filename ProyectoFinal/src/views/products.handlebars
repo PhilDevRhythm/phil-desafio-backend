@@ -1,5 +1,5 @@
 {{#if products.length}}
-  {{#each products}}
+  {{#each products as |product|}}
     <ul>
       <li>Product ID :{{_id}}</li>
       <li>{{name}}</li>
@@ -9,6 +9,9 @@
 
     </ul>
 
+    <div>
+          <button class=".addToCart" data-id="{{product._id}}">Add to cart</button>
+        </div> 
   {{/each}}
 {{else}}
   <p>No products available</p>
@@ -28,4 +31,4 @@
 </div>
 
 {{! <script src="/socket.io/socket.io.js"></script> }}
-{{! <script src="../public/index.js"></script> }}
+<script src="../cartOps.js"></script>

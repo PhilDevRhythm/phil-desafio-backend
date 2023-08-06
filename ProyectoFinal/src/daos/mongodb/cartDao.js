@@ -10,9 +10,9 @@ export const getAll = async () => {
   }
 };
 
-export const getById = async (id) => {
+export const getById = async (cartId) => {
   try {
-    const cart = await cartModel.findById(id).populate("items.product");
+    const cart = await cartModel.findById(cartId).populate("items.product");
     return cart;
   } catch (error) {
     console.log(error);
@@ -28,10 +28,10 @@ export const create = async () => {
   }
 };
 
-export const addProductToCart = async (id, productId) => {
+export const addProductToCart = async (cartId, productId) => {
   try {
     const product = await productModel.findById(productId);
-    const cart = await cartModel.findById(id);
+    const cart = await cartModel.findById(cartId);
     const prodInCart = cart.items.find(
       (item) => item.product._id.toString() === product._id.toString()
     );
@@ -50,9 +50,9 @@ export const addProductToCart = async (id, productId) => {
   }
 };
 
-export const updateCartItems = async (id, items) => {
+export const updateCartItems = async (cartId, items) => {
   try {
-    const cart = await cartModel.findById(id);
+    const cart = await cartModel.findById(cartId);
     cart.items = items;
     await cart.save();
     return cart;
@@ -61,9 +61,9 @@ export const updateCartItems = async (id, items) => {
   }
 };
 
-export const updateProductQuantity = async (id, productId, quantity) => {
+export const updateProductQuantity = async (cartId, productId, quantity) => {
   try {
-    const cart = await cartModel.findById(id);
+    const cart = await cartModel.findById(cartId);
     const prodInCart = cart.items.find(
       (item) => item.product._id.toString() === productId
     );
@@ -77,10 +77,10 @@ export const updateProductQuantity = async (id, productId, quantity) => {
   }
 };
 
-export const removeProducts = async (id) => {
+export const removeProducts = async (cartId) => {
   try {
     const cart = await cartModel.findByIdAndUpdate(
-      id,
+      cartId,
       { items: [] },
       { new: true }
     );
@@ -90,9 +90,9 @@ export const removeProducts = async (id) => {
   }
 };
 
-export const removeProductFromCart = async (id, productId) => {
+export const removeProductFromCart = async (cartId, productId) => {
   try {
-    const cart = await cartModel.findById(id);
+    const cart = await cartModel.findById(cartId);
     cart.items = cart.items.filter(
       (item) => item.product._id.toString() !== productId
     );

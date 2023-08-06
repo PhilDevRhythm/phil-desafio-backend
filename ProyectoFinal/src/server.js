@@ -37,7 +37,7 @@ app.set("view engine", "handlebars");
 //USEFUL
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/public"));
 
 // ERROR HANDLING
 app.use(errorHandler);

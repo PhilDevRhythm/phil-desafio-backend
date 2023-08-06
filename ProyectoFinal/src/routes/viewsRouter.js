@@ -31,6 +31,7 @@ router.get("/products", async (req, res) => {
       hasPrevPage,
       prevLink: `/products?page=${prevPage}`,
       nextLink: `/products?page=${nextPage}`,
+     
     });
   } catch (error) {
     res.render("error", { message: "Cart or product not found - viewRouter" });
@@ -39,15 +40,15 @@ router.get("/products", async (req, res) => {
 
 router.get("/:cartId", async (req, res) => {
   try {
-    const { id } = req.params;
+    const { cartId } = req.params;
     
-    const cart = await cartService.getById(id);
+    const cart = await cartService.getById(cartId);
     const flatItems = cart.items.map((item) => ({
       ...item.toObject(),
       totalPrice: item.product.price * item.quantity,
     }));
 
-    res.render("cart", { items: flatItems, id: cart._id });
+    res.render("cart", { items: flatItems, cartId: cart._id });
   } catch (error) {
     res.render("error", { message: "Cart not found" });
   }
