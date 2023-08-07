@@ -1,4 +1,5 @@
 {{#if products.length}}
+  
   {{#each products as |product|}}
     <ul>
       <li>Product ID :{{_id}}</li>
@@ -10,8 +11,8 @@
     </ul>
 
     <div>
-          <button class=".addToCart" data-id="{{product._id}}">Add to cart</button>
-        </div> 
+          <button type="submit" class=".addToCart" id="addToCart" data-id="{{product._id}}">Add to cart</button>
+        </div>
   {{/each}}
 {{else}}
   <p>No products available</p>
@@ -27,8 +28,11 @@
   {{#if hasNextPage}}
     <p><a href="{{nextLink}}">Next</a></p>
   {{/if}}
-
+{{!-- {{/if}} --}}
 </div>
 
 {{! <script src="/socket.io/socket.io.js"></script> }}
-<script src="../cartOps.js"></script>
+<script src="products.js">
+addToCart ()
+
+</script>

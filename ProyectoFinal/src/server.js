@@ -30,8 +30,6 @@ app.engine("handlebars", handlebars.engine());
 app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");
 
-
-
 // app.use("/", viewsRouter);
 
 //USEFUL
@@ -45,13 +43,101 @@ app.use(morgan("dev"));
 
 //FROM ROUTES
 app.use("/api/products", prodRouter);
-app.use("/", viewsRouter);
+app.use("/views", viewsRouter);
 app.use("/api/carts", cartRouter);
 
 // app STATUS
 app.listen(8080, () => {
   console.log(`app is on 8080`);
 });
+
+// SESSION
+
+import session from "express-session";
+import validateLogin from "../src/middlewares/validateLogin.js";
+import isAdmin from "../src/middlewares/isAdmin.js";
+
+// const sessionConfig = {
+//   secret: "secret",
+//   cookie: { maxAge: 10000 },
+//   saveUninitilized: true,
+//   resave: false,
+// };
+
+// app.use(session(sessionConfig));
+
+// const users = [
+//   { username: "admin", password: 1234, admin: true },
+//   { username: "user0", password: 1234, admin: false },
+// ];
+
+// app.post("/login", (req, res) => {
+//   const { username, password } = req.body;
+//   const index = users.findIndex(
+//     (user) => user.username === username && user.password === password
+//   );
+//   if (index < 0) res.json({ error: "User not found" });
+//   else {
+//     const user = users[index];
+//     req.session.info = {
+//       loggedIn: true,
+//       count: 1,
+//       admin: user.admin,
+//     };
+//     res.json({ msg: `Bienvenido ${user.username}` });
+//   }
+// });
+
+// app.get("/dashboard", validateLogin, (req, res) => {
+//   req.session.info.count++;
+//   res.json({
+//     msg: "Bienvenido",
+//     session: req.session,
+//   });
+// });
+
+// app.get("/admin-dashboard", validateLogin, isAdmin, (req, res) => {
+//   req.session.info.count++;
+//   res.json({
+//     msg: "Bienvenido Admin ",
+//     session: req.session,
+//   });
+// });
+
+// app.post("/logout", (req, res) => {
+//   req.session.destroy();
+//   res.json({ msg: "Session destroyed!" });
+// });
+
+// SESSION FILE STORE
+
+import cookieParser from "cookie-parser";
+import MongoStore from "connect-mongo";
+import userRouter from "./routes/userRouter.js";
+import { connectionString } from "./daos/mongodb/connection.js";
+
+// const fileStore = sessionFileStore(session);
+
+const mongoStoreOptions = {
+  store: MongoStore.create({
+    mongoUrl: connectionString,
+    // crypto: {
+    //   secret: "1234",
+    // },
+    reapInterval: 30,
+  }),
+  secret: "1234",
+  resave: false,
+  saveUninitilized: false,
+  cookie: {
+    maxAge: 60000,
+  },
+};
+
+app.use(cookieParser());
+app.use(session(mongoStoreOptions));
+
+app.use("/api", userRouter);
 
 // SOCKET
 

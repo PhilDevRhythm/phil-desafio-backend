@@ -34,6 +34,8 @@ export const create = async (req, res, next) => {
 
 export const addProductToCart = async (req, res, next) => {
   try {
+
+    
     const { cartId, productId } = req.params;
     const cart = await service.addProductToCart(cartId, productId);
 

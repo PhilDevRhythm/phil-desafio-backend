@@ -5,9 +5,10 @@ import * as cartService from "../services/cartServices.js";
 
 const router = Router();
 
-router.get("/products", async (req, res) => {
+router.get("/products" && "/:cartId", async (req, res) => {
   try {
     const { page } = req.query;
+
     const {
       payload: products,
       totalPages,
@@ -31,7 +32,6 @@ router.get("/products", async (req, res) => {
       hasPrevPage,
       prevLink: `/products?page=${prevPage}`,
       nextLink: `/products?page=${nextPage}`,
-     
     });
   } catch (error) {
     res.render("error", { message: "Cart or product not found - viewRouter" });
@@ -41,7 +41,7 @@ router.get("/products", async (req, res) => {
 router.get("/:cartId", async (req, res) => {
   try {
     const { cartId } = req.params;
-    
+
     const cart = await cartService.getById(cartId);
     const flatItems = cart.items.map((item) => ({
       ...item.toObject(),
