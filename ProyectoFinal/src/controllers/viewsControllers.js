@@ -11,9 +11,9 @@ export const errorLogin = (req, res) => {
   res.render("errorLogin");
 };
 export const profile = (req, res) => {
+  const data = { email: req.session.info}
   res.render(
-    "profile",
-    { user: req.session.user } && { role: req.session.role }
+    "profile", data
   );
   console.log(req.session);
 };

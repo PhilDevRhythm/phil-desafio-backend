@@ -36,11 +36,10 @@ router.get("products" && "/:cartId", async (req, res) => {
       hasPrevPage,
       hasNextPage,
       page: currentPage,
-      cartId: cartId,
     } = await productService.getAllProdWithPages({ page, limit: 1 });
 
     const flatProducts = products.map((product) => product.toObject());
-
+   
     res.render("products", {
       products: flatProducts,
       totalPages,
