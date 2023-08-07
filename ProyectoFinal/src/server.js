@@ -4,6 +4,7 @@ import { __dirname } from "./utils.js";
 import prodRouter from "./routes/prodRouter.js";
 import cartRouter from "./routes/cartRouter.js";
 import viewsRouter from "./routes/viewsRouter.js";
+
 import morgan from "morgan";
 import "./daos/mongodb/connection.js";
 
@@ -43,7 +44,7 @@ app.use(morgan("dev"));
 
 //FROM ROUTES
 app.use("/api/products", prodRouter);
-app.use("/views", viewsRouter);
+// app.use("/views", viewsRouter);
 app.use("/api/carts", cartRouter);
 
 // app STATUS
@@ -116,28 +117,30 @@ import MongoStore from "connect-mongo";
 import userRouter from "./routes/userRouter.js";
 import { connectionString } from "./daos/mongodb/connection.js";
 
+
 // const fileStore = sessionFileStore(session);
 
 const mongoStoreOptions = {
   store: MongoStore.create({
     mongoUrl: connectionString,
-    // crypto: {
-    //   secret: "1234",
-    // },
+    crypto: {
+      secret: "1234",
+    },
     reapInterval: 30,
   }),
   secret: "1234",
   resave: false,
   saveUninitilized: false,
   cookie: {
-    maxAge: 60000,
+    maxAge: 120000,
   },
 };
 
 app.use(cookieParser());
 app.use(session(mongoStoreOptions));
 
-app.use("/api", userRouter);
+app.use("/users", userRouter);
+app.use("/", viewsRouter);
 
 // SOCKET
 

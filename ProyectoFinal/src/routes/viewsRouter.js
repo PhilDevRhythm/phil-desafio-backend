@@ -2,10 +2,29 @@ import { Router } from "express";
 // import { getProducts } from "../managers/prodManager.js";
 import * as productService from "../services/productServices.js";
 import * as cartService from "../services/cartServices.js";
-
 const router = Router();
 
-router.get("/products" && "/:cartId", async (req, res) => {
+// LOGIN VIEWS
+
+import {
+  login,
+  register,
+  errorLogin,
+  errorRegister,
+  profile,
+  logout,
+} from "../controllers/viewsControllers.js";
+
+router.get("/login", login);
+router.get("/register", register);
+router.get("/errorLogin", errorLogin);
+router.get("/errorRegister", errorRegister);
+router.get("/profile", profile);
+router.get("/logout", logout);
+
+// PRODUCTS VIEWS
+
+router.get("products" && "/:cartId", async (req, res) => {
   try {
     const { page } = req.query;
 
@@ -17,6 +36,7 @@ router.get("/products" && "/:cartId", async (req, res) => {
       hasPrevPage,
       hasNextPage,
       page: currentPage,
+      cartId: cartId,
     } = await productService.getAllProdWithPages({ page, limit: 1 });
 
     const flatProducts = products.map((product) => product.toObject());
@@ -37,6 +57,8 @@ router.get("/products" && "/:cartId", async (req, res) => {
     res.render("error", { message: "Cart or product not found - viewRouter" });
   }
 });
+
+// CART VIEWS
 
 router.get("/:cartId", async (req, res) => {
   try {

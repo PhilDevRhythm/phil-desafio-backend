@@ -11,7 +11,7 @@
     </ul>
 
     <div>
-          <button type="submit" class=".addToCart" id="addToCart" data-id="{{product._id}}">Add to cart</button>
+          <button onclick="location.href="/{{product._id}}"">Add to cart</button>
         </div>
   {{/each}}
 {{else}}
@@ -30,9 +30,12 @@
   {{/if}}
 {{!-- {{/if}} --}}
 </div>
+<button onclick="location.href='/profile'">Back to your profile!!</button>
+<button onclick="location.href='/logout'">Logout</button>
 
 {{! <script src="/socket.io/socket.io.js"></script> }}
 <script src="products.js">
 addToCart ()
 
 </script>
+
