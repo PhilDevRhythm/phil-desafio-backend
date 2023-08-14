@@ -9,6 +9,14 @@ import morgan from "morgan";
 import "./daos/mongodb/connection.js";
 
 const app = express();
+
+// PASSPORT ANTES DE LA RUTA
+app.use(passport.initialize());
+app.use(passport.session());
+
+import passport from "passport";
+import "./passport/github-strategy.js";
+
 // SOCKET.IO
 
 // import { Server } from "socket.io";
@@ -114,7 +122,7 @@ import isAdmin from "../src/middlewares/isAdmin.js";
 
 import cookieParser from "cookie-parser";
 import MongoStore from "connect-mongo";
-import userRouter from "./routes/userRouter.js";
+import userRouter from "../../ProyectoFinal2/src/routes/userRouter.js";
 import { connectionString } from "./daos/mongodb/connection.js";
 
 
@@ -157,3 +165,10 @@ app.use("/", viewsRouter);
 //     socketServer.emit("prodList", products);
 //   });
 // });
+
+
+
+// PASSPORT GITHUB
+
+
+
