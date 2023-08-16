@@ -15,12 +15,12 @@ import {
   logout,
 } from "../controllers/viewsController.js";
 
-router.get("/login", login);
-router.get("/register", register);
-router.get("/errorLogin", errorLogin);
-router.get("/errorRegister", errorRegister);
-router.get("/profile", profile);
-router.get("/logout", logout);
+router.get("/users/login", login);
+router.get("/users/register", register);
+router.get("/users/errorLogin", errorLogin);
+router.get("/users/errorRegister", errorRegister);
+router.get("/users/profile", profile);
+router.get("/users/logout", logout);
 
 // PRODUCTS VIEWS
 

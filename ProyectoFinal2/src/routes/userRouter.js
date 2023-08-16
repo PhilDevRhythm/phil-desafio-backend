@@ -7,7 +7,7 @@ import {
   githubResponse,
 } from "../controllers/userController.js";
 import passport from "passport";
-import {isAuth} from "../utils.js";
+// import isAuth from "../utils.js";
 
 const router = Router();
 
@@ -17,7 +17,7 @@ router.post("/login", loginUser);
 // RUTA LOCAL
 router.post("/register", passport.authenticate("register"), registerResponse);
 router.post("/login", passport.authenticate("login"), loginResponse);
-router.get("/private", isAuth, (req, res) => res.send("route private"));
+router.get("/private", (req, res) => res.send("route private"));
 
 // RUTA PASSPORT-GITHUB
 router.get(

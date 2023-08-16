@@ -7,8 +7,8 @@ export const registerUser = async (req, res) => {
   try {
     const newUser = await userDao.registerUser(req.body);
     console.log(req.body);
-    if (newUser) res.redirect("/login");
-    else res.redirect("/errorRegister");
+    if (newUser) res.redirect("/users/login");
+    else res.redirect("/users/errorRegister");
   } catch (error) {
     console.log(error);
   }
@@ -20,10 +20,6 @@ export const loginUser = async (req, res) => {
     const user = await userDao.loginUser(req.body);
     if (user) {
       req.session.email = email;
-      req.session.fname = user.first_name;
-      req.session.lname = user.last_name;
-      req.session.age = user.age;
-      req.session.role = user.role;
       req.session.password = password;
       res.redirect("/profile");
     } else res.redirect("/errorLogin");

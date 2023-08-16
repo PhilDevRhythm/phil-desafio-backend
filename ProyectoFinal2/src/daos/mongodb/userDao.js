@@ -5,8 +5,8 @@ export default class UserDao {
   async registerUser(user) {
     try {
       const { email, password } = user;
-      const existUser = await this.getByEmail(email);
-      // console.log("existUser::", existUser);
+      const existUser = await userModel.findOne({email});
+      console.log("existUser::", existUser);
       // console.log(existUser.password);
       if (!existUser) {
         if (email === "admin@tech.cl" && password === "AdM1nDeM0") {
@@ -31,12 +31,13 @@ export default class UserDao {
       const { email, password } = user;
       const userExist = await userModel.findOne({ email });
       if (userExist) {
-        console.log(userExist.password);
+        console.log(user.password);
         console.log(user);
+        console.log(userExist);
         const passValid = isValidPassword(userExist, password);
         console.log(passValid);
         if (!passValid) return false;
-        else return userExist;
+        else return user;
       } else return false;
     } catch (error) {
       console.log(error);
