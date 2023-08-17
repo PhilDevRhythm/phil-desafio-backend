@@ -16,12 +16,19 @@ export const registerUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { first_name, last_name, email, isGithub, age, password} = req.body
     const user = await userDao.loginUser(req.body);
+    
     if (user) {
       req.session.email = email;
       req.session.password = password;
-      res.redirect("/users/profile");
+      res.render("profile", {
+        first_name: first_name,
+        last_name: last_name,
+        email: email,
+        isGithub: isGithub,
+        age: age,
+      });
     } else res.redirect("/users/errorLogin");
   } catch (error) {
     console.log(error);
@@ -103,18 +110,25 @@ export const loginResponse = async (req, res, next) => {
 export const githubResponse = async (req, res, next) => {
   try {
     // console.log(req.user)
-    const { first_name, last_name, email, isGithub } = req.user;
-    res.json({
-      msg: "Register/Login Github OK with" + `${" " + first_name}`,
-      session: req.session,
-      userData: {
-        first_name,
-        last_name,
-        email,
-        isGithub: true,
-      },
-    }),
-      res.redirect("/profile");
+    const { first_name, last_name, email, isGithub, age } = req.user;
+    // res.json({
+    //   msg: "Register/Login Github OK with" + `${" " + first_name}`,
+    //   session: req.session,
+    //   userData: {
+    //     first_name,
+    //     last_name,
+    //     email,
+    //     isGithub: true,
+    //   },
+    // }),
+    console.log(req.user);
+    res.render("profile", {
+      first_name: first_name,
+      last_name: last_name,
+      email: email,
+      isGithub: isGithub,
+      age: age,
+    });
     return;
   } catch (error) {
     next(error.message);

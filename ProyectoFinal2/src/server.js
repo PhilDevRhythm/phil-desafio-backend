@@ -18,10 +18,6 @@ const app = express();
 import passport from "passport";
 import "./passport/github-strategy.js";
 
-
-
-
-
 // HANDLEBARS CONFIGURATION
 
 import handlebars from "express-handlebars";
@@ -53,8 +49,6 @@ app.listen(8080, () => {
 
 // SESSION
 
-
-
 const sessionConfig = {
   secret: "secret",
   cookie: { maxAge: 10000 },
@@ -69,22 +63,27 @@ app.use(session(sessionConfig));
 //   { username: "user0", password: 1234, admin: false },
 // ];
 
-// app.post("/login", (req, res) => {
-//   const { username, password } = req.body;
-//   const index = users.findIndex(
-//     (user) => user.username === username && user.password === password
-//   );
-//   if (index < 0) res.json({ error: "User not found" });
-//   else {
-//     const user = users[index];
-//     req.session.info = {
-//       loggedIn: true,
-//       count: 1,
-//       admin: user.admin,
-//     };
-//     res.json({ msg: `Bienvenido ${user.username}` });
-//   }
-// });
+import { userModel } from "./daos/mongodb/models/userModel.js";
+
+app.post("/users/alt-login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const users = await userModel.findOne({ email });
+    const index = users.findIndex(
+      (user) => user.username === email && user.password === password
+    );
+    if (index < 0) res.json({ error: "User not found" });
+    else {
+      const user = users[index];
+      req.session.info = {
+        loggedIn: true,
+        count: 1,
+        admin: user.admin,
+      };
+      res.json({ msg: `Bienvenido ${user.username}` });
+    }
+  } catch {}
+});
 
 // app.get("/dashboard", validateLogin, (req, res) => {
 //   req.session.info.count++;
@@ -102,10 +101,10 @@ app.use(session(sessionConfig));
 //   });
 // });
 
-// app.post("/logout", (req, res) => {
-//   req.session.destroy();
-//   res.json({ msg: "Session destroyed!" });
-// });
+app.post("/logout", (req, res) => {
+  req.session.destroy();
+  res.json({ msg: "Session destroyed!" });
+});
 
 // SESSION FILE STORE
 
@@ -113,7 +112,6 @@ import cookieParser from "cookie-parser";
 import MongoStore from "connect-mongo";
 import userRouter from "./routes/userRouter.js";
 import { connectionString } from "./daos/mongodb/connection.js";
-
 
 // const fileStore = sessionFileStore(session);
 

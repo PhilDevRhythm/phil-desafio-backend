@@ -19,9 +19,9 @@ const registerOrLogin = async (accessToken, refreshToken, profile, done) => {
   const newUser = await userDao.registerUser({
     first_name: profile._json.name.split(" ")[0],
     last_name: profile._json.name.split(" ")[1],
-    password: "",
+    isGitHub: true,
+    password:"*******",
     email,
-    isGithub: true,
   });
 
   // res.redirect("/users/profile");

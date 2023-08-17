@@ -27,9 +27,9 @@ router.get(
 router.get(
   "/profile-github",
   passport.authenticate("github", { scope: ["user:email"] }),
-  githubResponse
+  githubResponse, validateLogin,
 );
-
+ 
 // SESSION LOGIN
 
 import {
