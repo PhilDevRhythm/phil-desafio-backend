@@ -21,6 +21,7 @@ router.get("/users/errorLogin", errorLogin);
 router.get("/users/errorRegister", errorRegister);
 router.get("/users/profile", profile);
 router.get("/users/logout", logout);
+router.get("/", login);
 
 // PRODUCTS VIEWS
 

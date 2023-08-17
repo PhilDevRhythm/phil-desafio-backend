@@ -7,11 +7,13 @@ export const __dirname = dirname(fileURLToPath(import.meta.url));
 // BCRYPT
 
 export const createHash = password => {
-  hashSync(password, genSaltSync(10));
+  const hashPass = hashSync(password, genSaltSync(10));
+  return hashPass
 };
 export const isValidPassword = (user, password) => {
   // console.log(password, user.password);
-  compareSync(password, user.password);
+  const eqHashPass = compareSync(password, user.password);
+  return eqHashPass
 };
 
 export const isAuth = (req, res, next) => {

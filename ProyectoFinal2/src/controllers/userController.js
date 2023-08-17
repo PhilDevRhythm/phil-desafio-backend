@@ -21,8 +21,8 @@ export const loginUser = async (req, res) => {
     if (user) {
       req.session.email = email;
       req.session.password = password;
-      res.redirect("/profile");
-    } else res.redirect("/errorLogin");
+      res.redirect("/users/profile");
+    } else res.redirect("/users/errorLogin");
   } catch (error) {
     console.log(error);
   }
@@ -105,15 +105,17 @@ export const githubResponse = async (req, res, next) => {
     // console.log(req.user)
     const { first_name, last_name, email, isGithub } = req.user;
     res.json({
-      msg: "Register/Login Github OK",
+      msg: "Register/Login Github OK with" + `${" " + first_name}`,
       session: req.session,
       userData: {
         first_name,
         last_name,
         email,
-        isGithub,
+        isGithub: true,
       },
-    });
+    }),
+      res.redirect("/profile");
+    return;
   } catch (error) {
     next(error.message);
   }

@@ -22,18 +22,19 @@ const registerOrLogin = async (accessToken, refreshToken, profile, done) => {
     password: "",
     email,
     isGithub: true,
-  }); 
+  });
+
+  // res.redirect("/users/profile");
   return done(null, newUser);
-  
 };
 
 passport.use("github", new GithubStrategy(strategyOptions, registerOrLogin));
 
-passport.serializeUser((user, done)=>{
-  done(null, user._id)
+passport.serializeUser((user, done) => {
+  done(null, user._id);
 });
 
-passport.deserializeUser(async(id, done)=> {
+passport.deserializeUser(async (id, done) => {
   const user = await userDao.getById(id);
   return done(null, user);
 });
