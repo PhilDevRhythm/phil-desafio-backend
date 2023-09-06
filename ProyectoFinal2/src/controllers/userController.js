@@ -22,6 +22,11 @@ export const loginUser = async (req, res) => {
     if (user) {
       req.session.email = email;
       req.session.password = password;
+      req.session.isGithub = isGithub;
+      req.session.last_name = last_name;
+      req.session.first_name = first_name;
+      req.session.age = age;
+      
       res.render("profile", {
         first_name: first_name,
         last_name: last_name,
