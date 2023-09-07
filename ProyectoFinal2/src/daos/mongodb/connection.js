@@ -1,9 +1,10 @@
-import mongoose from "mongoose";
+import {connect} from "mongoose";
+import 'dotenv/config'
 
-export const connectionString = "mongodb://localhost:27017/products";
+export const connectionString = process.env.MONGO_LOCAL_URL;
 
 try {
-  await mongoose.connect(connectionString);
+  await connect(connectionString);
   console.log("conectado a Mongo DB");
 } catch (error) {
   console.log(error);

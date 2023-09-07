@@ -1,3 +1,4 @@
+
 import productDaoMongoDB from "../daos/mongodb/productDao.js";
 
 const productDao = new productDaoMongoDB();

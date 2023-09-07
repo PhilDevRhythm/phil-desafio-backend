@@ -1,7 +1,8 @@
 import { userModel } from "./models/userModel.js";
 import { createHash, isValidPassword } from "../../utils.js";
+import MongoDao from "./mongo.dao.js";
 
-export default class UserDao {
+export default class UserDao extends MongoDao{
   async registerUser(user) {
     try {
       const { email, password } = user;

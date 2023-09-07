@@ -4,6 +4,13 @@ import { __dirname } from "./utils.js";
 import prodRouter from "./routes/prodRouter.js";
 import cartRouter from "./routes/cartRouter.js";
 import viewsRouter from "./routes/viewsRouter.js";
+import MainRouter from "./routes/index.js";
+
+const mainRouter = new MainRouter();
+
+import { userModel } from "./daos/mongodb/models/userModel.js";
+
+import "dotenv/config";
 
 import session from "express-session";
 import validateLogin from "./middlewares/validateLogin.js";
@@ -11,8 +18,6 @@ import isAdmin from "./middlewares/isAdmin.js";
 
 import morgan from "morgan";
 import "./daos/mongodb/connection.js";
-
-const app = express();
 
 // PASSPORT
 import passport from "passport";
@@ -22,68 +27,79 @@ import "./passport/github-strategy.js";
 
 import handlebars from "express-handlebars";
 
-app.engine("handlebars", handlebars.engine());
-app.set("views", __dirname + "/views");
-app.set("view engine", "handlebars");
 
-// app.use("/", viewsRouter);
-
-//USEFUL
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(__dirname + "/public"));
-
-// ERROR HANDLING
-app.use(errorHandler);
-app.use(morgan("dev"));
-
-//FROM ROUTES
-app.use("/api/products", prodRouter);
-// app.use("/views", viewsRouter);
-app.use("/api/carts", cartRouter);
-
-// app STATUS
-app.listen(8080, () => {
-  console.log(`app is on 8080`);
-});
-
-// SESSION
-
-const sessionConfig = {
-  secret: "secret",
-  cookie: { maxAge: 10000 },
-  saveUninitilized: true,
+const mongoStoreOptions = {
+  store: MongoStore.create({
+    mongoUrl: connectionString,
+    crypto: {
+      secret: "1234",
+    },
+    reapInterval: 30,
+  }),
+  secret: "1234",
   resave: false,
+  saveUninitilized: false,
+  cookie: {
+    maxAge: 120000,
+  },
 };
 
-app.use(session(sessionConfig));
+const app = express();
 
-// const users = [
-//   { username: "admin", password: 1234, admin: true },
-//   { username: "user0", password: 1234, admin: false },
-// ];
+app
+  .engine("handlebars", handlebars.engine())
+  .set("views", __dirname + "/views")
+  .set("view engine", "handlebars")
 
-import { userModel } from "./daos/mongodb/models/userModel.js";
+  // app.use("/", viewsRouter);
 
-app.post("/users/alt-login", async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    const users = await userModel.findOne({ email });
-    const index = users.findIndex(
-      (user) => user.username === email && user.password === password
-    );
-    if (index < 0) res.json({ error: "User not found" });
-    else {
-      const user = users[index];
-      req.session.info = {
-        loggedIn: true,
-        count: 1,
-        admin: user.admin,
-      };
-      res.json({ msg: `Bienvenido ${user.username}` });
-    }
-  } catch {}
-});
+  //USEFUL
+
+  .use(express.json())
+  .use(express.urlencoded({ extended: true }))
+  .use(express.static(__dirname + "/public"))
+
+  // ERROR HANDLING
+  .use(errorHandler)
+  .use(morgan("dev"))
+
+  //FROM ROUTES
+  // .use("/api/products", prodRouter)
+  // // app.use("/views", viewsRouter);
+  // .use("/api/carts", cartRouter)
+  .use("/api", mainRouter.getRouter())
+
+  // app STATUS
+  .listen(process.env.PORT, () => {
+    console.log(`app is on ${process.env.PORT}`)
+  })
+
+  app.post("/users/alt-login", async (req, res) => {
+    try {
+      const { email, password } = req.body;
+      const users = await userModel.findOne({ email });
+      const index = users.findIndex(
+        (user) => user.username === email && user.password === password
+      );
+      if (index < 0) res.json({ error: "User not found" })
+      else {
+        const user = users[index];
+        req.session.info = {
+          loggedIn: true,
+          count: 1,
+          admin: user.admin,
+        };
+        res.json({ msg: `Bienvenido ${user.username}` })
+      }
+    } catch {}
+  })
+
+  
+    .use(cookieParser())
+    .use(session(mongoStoreOptions))
+    
+    .use("/", viewsRouter)
+
 
 // app.get("/dashboard", validateLogin, (req, res) => {
 //   req.session.info.count++;
@@ -115,27 +131,22 @@ import { connectionString } from "./daos/mongodb/connection.js";
 
 // const fileStore = sessionFileStore(session);
 
-const mongoStoreOptions = {
-  store: MongoStore.create({
-    mongoUrl: connectionString,
-    crypto: {
-      secret: "1234",
-    },
-    reapInterval: 30,
-  }),
-  secret: "1234",
+
+// SESSION
+
+const sessionConfig = {
+  secret: "secret",
+  cookie: { maxAge: 10000 },
+  saveUninitilized: true,
   resave: false,
-  saveUninitilized: false,
-  cookie: {
-    maxAge: 120000,
-  },
 };
 
-app.use(cookieParser());
-app.use(session(mongoStoreOptions));
+app.use(session(sessionConfig));
 
-app.use("/users", userRouter);
-app.use("/", viewsRouter);
+// const users = [
+//   { username: "admin", password: 1234, admin: true },
+//   { username: "user0", password: 1234, admin: false },
+// ];
 
 // SOCKET
 
