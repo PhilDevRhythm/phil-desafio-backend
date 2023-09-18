@@ -1,7 +1,7 @@
 import Services from "./class.services.js";
-import pkg from 'jsonwebtoken';
+import pkg from "jsonwebtoken";
 const { sign } = pkg;
-import 'dotenv/config';
+import "dotenv/config";
 import UserDaoMongo from "../daos/mongodb/user.dao.js";
 const userDao = new UserDaoMongo();
 
@@ -16,8 +16,8 @@ export default class UserService extends Services {
     const payload = {
       userId: user.id,
     };
-    return sign(payload, SECRET_KEY, { expiresIn: '10m' });
-  };
+    return sign(payload, SECRET_KEY, { expiresIn: "10m" });
+  }
 
   async register(user) {
     try {
@@ -25,15 +25,25 @@ export default class UserService extends Services {
     } catch (error) {
       console.log(error);
     }
-  };
+  }
 
   async login(user) {
     try {
       const userExist = await userDao.login(user);
-      if(userExist) return this.#generateToken(userExist);
+      if (userExist) return this.#generateToken(userExist);
       else return false;
     } catch (error) {
       console.log(error);
     }
-  };
+  }
+
+  async addProdToUserCart(userId, prodId, quantity) {
+    try {
+      const existProd = await prodDao.getById(prodId);
+      if (!existProd) return false;
+      return userDao.addProdToUserCart(userId, prodId, quantity);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }

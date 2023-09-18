@@ -1,8 +1,8 @@
 import { userModel } from "./models/userModel.js";
 import { createHash, isValidPassword } from "../../utils.js";
-import MongoDao from "./mongo.dao.js";
+import MongoDao from "./mongoDao.js";
 
-export default class UserDao extends MongoDao{
+export default class UserDao extends MongoDao {
   async registerUser(user) {
     try {
       const { email, password } = user;
@@ -35,7 +35,7 @@ export default class UserDao extends MongoDao{
         console.log(user.password);
         console.log(user);
         console.log(userExist);
-        return isValidPassword(userExist, password ) ? userExist : false;
+        return isValidPassword(userExist, password) ? userExist : false;
       } else return false;
     } catch (error) {
       console.log(error);
@@ -61,6 +61,21 @@ export default class UserDao extends MongoDao{
     } catch (error) {
       console.log(error);
       throw new Error(error);
+    }
+  }
+
+  async addProdToUserCart(userId, prodId, quantity) {
+    try {
+      const user = await userModel.findById(userId);
+      if (!user) return false;
+      user.cart.push({
+        _id: prodId,
+        quantity,
+      });
+      user.save();
+      return user;
+    } catch (error) {
+      console.log(error);
     }
   }
 }

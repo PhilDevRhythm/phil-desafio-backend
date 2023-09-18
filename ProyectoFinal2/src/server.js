@@ -30,7 +30,7 @@ import handlebars from "express-handlebars";
 
 const mongoStoreOptions = {
   store: MongoStore.create({
-    mongoUrl: connectionString,
+    mongoUrl: process.env.MONGO_LOCAL_URL,
     crypto: {
       secret: "1234",
     },
@@ -127,7 +127,7 @@ app.post("/logout", (req, res) => {
 import cookieParser from "cookie-parser";
 import MongoStore from "connect-mongo";
 import userRouter from "./routes/userRouter.js";
-import { connectionString } from "./daos/mongodb/connection.js";
+// import { connectionString } from "./daos/mongodb/connection.js";
 
 // const fileStore = sessionFileStore(session);
 

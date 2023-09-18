@@ -1,5 +1,5 @@
 import { productModel } from "./models/productModel.js";
-import MongoDao from "./mongo.dao.js";
+import MongoDao from "./mongoDao.js";
 
 // import mongoose from "mongoose";
 

@@ -4,6 +4,7 @@ import userRouter from "./userRouter.js";
 import prodRouter from "./prodRouter.js";
 import viewsRouter from "./viewsRouter.js";
 import cartRouter from "./cartRouter.js";
+import ticketRouter from "./ticketRouter.js";
 
 export default class MainRouter {
   constructor() {
@@ -15,6 +16,7 @@ export default class MainRouter {
     this.router.use("/products", prodRouter);
     this.router.use("/views", viewsRouter);
     this.router.use("/cart", cartRouter);
+    this.router.use("/ticket", ticketRouter);
   }
 
   getRouter() {

@@ -16,9 +16,9 @@ export const registerUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
   try {
-    const { first_name, last_name, email, isGithub, age, password} = req.body
+    const { first_name, last_name, email, isGithub, age, password } = req.body;
     const user = await userDao.loginUser(req.body);
-    
+
     if (user) {
       req.session.email = email;
       req.session.password = password;
@@ -26,7 +26,7 @@ export const loginUser = async (req, res) => {
       req.session.last_name = last_name;
       req.session.first_name = first_name;
       req.session.age = age;
-      
+
       res.render("profile", {
         first_name: first_name,
         last_name: last_name,
@@ -135,6 +135,24 @@ export const githubResponse = async (req, res, next) => {
       age: age,
     });
     return;
+  } catch (error) {
+    next(error.message);
+  }
+};
+
+export const addProdToUserCart = async (req, res, next) => {
+  try {
+    const { _id } = req.user;
+    const { idProd } = req.params;
+    const { quantity } = req.params;
+    const newProdToUserCart = await userService.addProdToUserCart(
+      _id,
+      idProd,
+      Number(quantity)
+    );
+    if (!newProdToUserCart)
+      createResponse(res, 404, "Error add product to user cart");
+    createResponse(res, 200, newProdToUserCart);
   } catch (error) {
     next(error.message);
   }
