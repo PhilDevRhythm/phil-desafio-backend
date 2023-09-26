@@ -1,4 +1,3 @@
-
 // import productDaoMongoDB from "../daos/mongodb/productDao.js";
 
 // const productDao = new productDaoMongoDB();
@@ -78,35 +77,58 @@
 //   }
 // };
 
-
 import Services from "./classServices.js";
 import factory from "../daos/mongodb/factory.js";
 const { prodDao } = factory;
-import ProductRepository from "../dtos/product/productRepo.js"
+import ProductRepository from "../dtos/product/productRepo.js";
 const prodRepository = new ProductRepository();
 
+import { generateProduct } from "../utils.js";
+import { productModel } from "../daos/mongodb/models/productModel.js";
+
 export default class ProductService extends Services {
-    constructor() {
-        super(prodDao);
-    }
+  constructor() {
+    super(prodDao);
+  }
 
-    async getByIdDTO(id){
-        try {
-            const prod = await prodRepository.getByIdDTO(id);
-            if(!prod) return false;
-            else return prod;
-        } catch (error) {
-            console.log(error);
-        }
+  async getByIdDTO(id) {
+    try {
+      const prod = await prodRepository.getByIdDTO(id);
+      if (!prod) return false;
+      else return prod;
+    } catch (error) {
+      console.log(error);
     }
+  }
 
-    createProdDTO = async (obj) => {
-        try {
-          const newItem = await prodRepository.createProdDTO(obj);
-          if (!newItem) return false;
-          else return newItem;
-        } catch (error) {
-          console.log(error);
-        }
-    };
+  createProdDTO = async (obj) => {
+    try {
+      const newItem = await prodRepository.createProdDTO(obj);
+      if (!newItem) return false;
+      else return newItem;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export const createProdMock = async (cant = 100) => {
+  try {
+    const products = [];
+    for (let i = 0; i < cant; i++) {
+      const product = generateProduct();
+      products.push(product);
+    }
+    await productModel.create(products);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getProducts = async () => {
+  try {
+    return await productModel.find({});
+  } catch (error) {
+    console.log(error);
+  }
 };

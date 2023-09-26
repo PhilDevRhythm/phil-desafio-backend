@@ -2,7 +2,7 @@ import Services from "./class.services.js";
 import pkg from "jsonwebtoken";
 const { sign } = pkg;
 import "dotenv/config";
-import UserDaoMongo from "../daos/mongodb/user.dao.js";
+import UserDaoMongo from "../daos/mongodb/userDao.js";
 const userDao = new UserDaoMongo();
 
 const SECRET_KEY = process.env.SECRET_KEY_JWT;
@@ -47,3 +47,5 @@ export default class UserService extends Services {
     }
   }
 }
+
+

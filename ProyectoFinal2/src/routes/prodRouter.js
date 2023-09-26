@@ -14,4 +14,7 @@ router.put("/:productId", controller.updateCtl);
 // DELETE PRODUCT
 router.delete("/:productId", controller.removeCtl);
 
+router.post("/genmockingproducts", controller.createProduct);
+router.get("/mockingproducts", controller.getProducts);
+
 export default router;

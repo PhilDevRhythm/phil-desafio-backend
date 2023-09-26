@@ -28,3 +28,15 @@ export const isAuth = (req, res, next) => {
 };
 
 // client secret 341dfe25a4b3a2a5276c283da5599954e42ea8fd
+
+import { fakerES as faker } from "@faker-js/faker";
+
+export const generateProduct = () => {
+  return {
+    name: faker.commerce.productName(),
+    description: faker.commerce.productDescription(),
+    category: faker.commerce.department(),
+    price: faker.commerce.price(),
+    stock: faker.number.int(),
+  };
+};
