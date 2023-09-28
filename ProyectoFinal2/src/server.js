@@ -27,7 +27,6 @@ import "./passport/github-strategy.js";
 
 import handlebars from "express-handlebars";
 
-
 const mongoStoreOptions = {
   store: MongoStore.create({
     mongoUrl: process.env.MONGO_LOCAL_URL,
@@ -71,17 +70,18 @@ app
 
   // app STATUS
   .listen(process.env.PORT, () => {
-    console.log(`app is on ${process.env.PORT}`)
-  })
+    console.log(`app is on ${process.env.PORT} pid: ${process.pid}`);
+  });
 
-  app.post("/users/alt-login", async (req, res) => {
+app
+  .post("/users/alt-login", async (req, res) => {
     try {
       const { email, password } = req.body;
       const users = await userModel.findOne({ email });
       const index = users.findIndex(
         (user) => user.username === email && user.password === password
       );
-      if (index < 0) res.json({ error: "User not found" })
+      if (index < 0) res.json({ error: "User not found" });
       else {
         const user = users[index];
         req.session.info = {
@@ -89,17 +89,15 @@ app
           count: 1,
           admin: user.admin,
         };
-        res.json({ msg: `Bienvenido ${user.username}` })
+        res.json({ msg: `Bienvenido ${user.username}` });
       }
     } catch {}
   })
 
-  
-    .use(cookieParser())
-    .use(session(mongoStoreOptions))
-    
-    .use("/", viewsRouter)
+  .use(cookieParser())
+  .use(session(mongoStoreOptions))
 
+  .use("/", viewsRouter);
 
 // app.get("/dashboard", validateLogin, (req, res) => {
 //   req.session.info.count++;
@@ -130,7 +128,6 @@ import userRouter from "./routes/userRouter.js";
 // import { connectionString } from "./daos/mongodb/connection.js";
 
 // const fileStore = sessionFileStore(session);
-
 
 // SESSION
 
