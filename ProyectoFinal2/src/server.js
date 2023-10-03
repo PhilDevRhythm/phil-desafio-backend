@@ -10,6 +10,10 @@ const mainRouter = new MainRouter();
 
 import { userModel } from "./daos/mongodb/models/userModel.js";
 
+import cookieParser from "cookie-parser";
+import MongoStore from "connect-mongo";
+import userRouter from "./routes/userRouter.js";
+
 import "dotenv/config";
 
 import session from "express-session";
@@ -27,154 +31,178 @@ import "./passport/github-strategy.js";
 
 import handlebars from "express-handlebars";
 
-const mongoStoreOptions = {
-  store: MongoStore.create({
-    mongoUrl: process.env.MONGO_LOCAL_URL,
-    crypto: {
-      secret: "1234",
-    },
-    reapInterval: 30,
-  }),
-  secret: "1234",
-  resave: false,
-  saveUninitilized: false,
-  cookie: {
-    maxAge: 120000,
-  },
-};
-
 const app = express();
+app.listen(process.env.PORT, () => {
+  console.log(`app is on ${process.env.PORT} pid: ${process.pid}`);
+});
+import cluster from "cluster";
+import { cpus } from "os";
 
-app
-  .engine("handlebars", handlebars.engine())
-  .set("views", __dirname + "/views")
-  .set("view engine", "handlebars")
+const numCPUS = cpus().length;
+console.log(numCPUS);
 
-  // app.use("/", viewsRouter);
+if (cluster.isPrimary) {
+  // proceso padre
+  console.log(`nucleos--> ${numCPUS}`);
+  console.log(`PID MASTER--> ${process.pid}`);
 
-  //USEFUL
+  for (let index = 0; index < numCPUS; index++) {
+    cluster.fork();
+  }
 
-  .use(express.json())
-  .use(express.urlencoded({ extended: true }))
-  .use(express.static(__dirname + "/public"))
+  cluster.on("exit", (worker, code) => {
+    console.log(`worker ${worker.process.id} exited with code ${code}`);
+    cluster.fork();
+  });
+  // proceso hijo
+} else {
+  // const app = express();
 
-  // ERROR HANDLING
-  .use(errorHandler)
-  .use(morgan("dev"))
+  app
+    .engine("handlebars", handlebars.engine())
+    .set("views", __dirname + "/views")
+    .set("view engine", "handlebars")
 
-  //FROM ROUTES
-  // .use("/api/products", prodRouter)
-  // // app.use("/views", viewsRouter);
-  // .use("/api/carts", cartRouter)
-  .use("/api", mainRouter.getRouter())
+    // app.use("/", viewsRouter);
+
+    //USEFUL
+
+    .use(express.json())
+    .use(express.urlencoded({ extended: true }))
+    .use(express.static(__dirname + "/public"))
+
+    // ERROR HANDLING
+    .use(errorHandler)
+    .use(morgan("dev"))
+
+    //FROM ROUTES
+    // .use("/api/products", prodRouter)
+    // // app.use("/views", viewsRouter);
+    // .use("/api/carts", cartRouter)
+    .use("/api", mainRouter.getRouter());
 
   // app STATUS
-  .listen(process.env.PORT, () => {
-    console.log(`app is on ${process.env.PORT} pid: ${process.pid}`);
+
+  const mongoStoreOptions = {
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGO_LOCAL_URL,
+      crypto: {
+        secret: "1234",
+      },
+      reapInterval: 30,
+    }),
+    secret: "1234",
+    resave: false,
+    saveUninitilized: false,
+    cookie: {
+      maxAge: 120000,
+    },
+  };
+
+  app
+    .post("/dead", async (req, res) => {
+      try {
+      } catch (error) {}
+    })
+    .post("/users/alt-login", async (req, res) => {
+      try {
+        const { email, password } = req.body;
+        const users = await userModel.findOne({ email });
+        const index = users.findIndex(
+          (user) => user.username === email && user.password === password
+        );
+        if (index < 0) res.json({ error: "User not found" });
+        else {
+          const user = users[index];
+          req.session.info = {
+            loggedIn: true,
+            count: 1,
+            admin: user.admin,
+          };
+          res.json({ msg: `Bienvenido ${user.username}` });
+        }
+      } catch {}
+    })
+
+    .use(cookieParser())
+    .use(session(mongoStoreOptions))
+
+    .use("/", viewsRouter);
+
+  // app.get("/dashboard", validateLogin, (req, res) => {
+  //   req.session.info.count++;
+  //   res.json({
+  //     msg: "Bienvenido",
+  //     session: req.session,
+  //   });
+  // });
+
+  // app.get("/admin-dashboard", validateLogin, isAdmin, (req, res) => {
+  //   req.session.info.count++;
+  //   res.json({
+  //     msg: "Bienvenido Admin ",
+  //     session: req.session,
+  //   });
+  // });
+
+  app.post("/logout", (req, res) => {
+    req.session.destroy();
+    res.json({ msg: "Session destroyed!" });
   });
 
-app
-  .post("/users/alt-login", async (req, res) => {
-    try {
-      const { email, password } = req.body;
-      const users = await userModel.findOne({ email });
-      const index = users.findIndex(
-        (user) => user.username === email && user.password === password
-      );
-      if (index < 0) res.json({ error: "User not found" });
-      else {
-        const user = users[index];
-        req.session.info = {
-          loggedIn: true,
-          count: 1,
-          admin: user.admin,
-        };
-        res.json({ msg: `Bienvenido ${user.username}` });
-      }
-    } catch {}
-  })
+  // SESSION FILE STORE
 
-  .use(cookieParser())
-  .use(session(mongoStoreOptions))
+  // import { connectionString } from "./daos/mongodb/connection.js";
 
-  .use("/", viewsRouter);
+  // const fileStore = sessionFileStore(session);
 
-// app.get("/dashboard", validateLogin, (req, res) => {
-//   req.session.info.count++;
-//   res.json({
-//     msg: "Bienvenido",
-//     session: req.session,
-//   });
-// });
+  // SESSION
 
-// app.get("/admin-dashboard", validateLogin, isAdmin, (req, res) => {
-//   req.session.info.count++;
-//   res.json({
-//     msg: "Bienvenido Admin ",
-//     session: req.session,
-//   });
-// });
+  const sessionConfig = {
+    secret: "secret",
+    cookie: { maxAge: 10000 },
+    saveUninitilized: true,
+    resave: false,
+  };
 
-app.post("/logout", (req, res) => {
-  req.session.destroy();
-  res.json({ msg: "Session destroyed!" });
-});
+  app.use(session(sessionConfig));
 
-// SESSION FILE STORE
+  // const users = [
+  //   { username: "admin", password: 1234, admin: true },
+  //   { username: "user0", password: 1234, admin: false },
+  // ];
 
-import cookieParser from "cookie-parser";
-import MongoStore from "connect-mongo";
-import userRouter from "./routes/userRouter.js";
-// import { connectionString } from "./daos/mongodb/connection.js";
+  // SOCKET
 
-// const fileStore = sessionFileStore(session);
+  // const socketServer = new Server(httpServer);
 
-// SESSION
+  // socketServer.on("connection", (socket) => {
+  //   console.log(`Connected id: ${socket.id}`);
+  //   socket.on("disconnect", () => {
+  //     console.log(`Disconnecting ${socket.id}`);
+  //   });
+  //   socket.emit("connected");
+  //   socket.on("newProduct", (obj) => {
+  //     products.push(obj);
+  //     socketServer.emit("prodList", products);
+  //   });
+  // });
 
-const sessionConfig = {
-  secret: "secret",
-  cookie: { maxAge: 10000 },
-  saveUninitilized: true,
-  resave: false,
-};
+  // SOCKET.IO
 
-app.use(session(sessionConfig));
+  // import { Server } from "socket.io";
 
-// const users = [
-//   { username: "admin", password: 1234, admin: true },
-//   { username: "user0", password: 1234, admin: false },
-// ];
+  // const httpServer = app.listen(8080, () => {
+  //   console.log(`APP is on ${8080}`);
+  // });
 
-// SOCKET
+  // app.get("/realtimeproducts", (req, res) => {
+  //   res.render("realtimeproducts");
 
-// const socketServer = new Server(httpServer);
+  //   ;
+  // });
 
-// socketServer.on("connection", (socket) => {
-//   console.log(`Connected id: ${socket.id}`);
-//   socket.on("disconnect", () => {
-//     console.log(`Disconnecting ${socket.id}`);
-//   });
-//   socket.emit("connected");
-//   socket.on("newProduct", (obj) => {
-//     products.push(obj);
-//     socketServer.emit("prodList", products);
-//   });
-// });
-
-// SOCKET.IO
-
-// import { Server } from "socket.io";
-
-// const httpServer = app.listen(8080, () => {
-//   console.log(`APP is on ${8080}`);
-// });
-
-// app.get("/realtimeproducts", (req, res) => {
-//   res.render("realtimeproducts");
-
-//   ;
-// });
-
-// USAR PASSPORT SESSION ABAJO CON SESSION ACTIVO
-app.use(passport.session());
-app.use(passport.initialize());
+  // USAR PASSPORT SESSION ABAJO CON SESSION ACTIVO
+  app.use(passport.session());
+  app.use(passport.initialize());
+}
