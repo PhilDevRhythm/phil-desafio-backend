@@ -63,10 +63,27 @@ app
   .use(morgan("dev"))
 
   //FROM ROUTES
-  // .use("/api/products", prodRouter)
+  .use("/prod", prodRouter)
   // // app.use("/views", viewsRouter);
   // .use("/api/carts", cartRouter)
-  .use("/api", mainRouter.getRouter())
+  .use("/api", mainRouter.getRouter());
+
+// ERRORES
+
+import { httpResponse } from "./httpResponse.js";
+
+const httpReso = new httpResponse();
+
+app
+  .get("/", (req, res) => {
+    try {
+      let data = [];
+      if (data.length === 0)
+        return httpReso.NotFound(res, "No se encontro nada");
+    } catch (error) {}
+    return httpReso.Ok(res, "Welcome!");
+    // throw new Error("Error");
+  })
 
   // app STATUS
   .listen(process.env.PORT, () => {
@@ -178,3 +195,6 @@ app.use(session(sessionConfig));
 // USAR PASSPORT SESSION ABAJO CON SESSION ACTIVO
 app.use(passport.session());
 app.use(passport.initialize());
+
+import { errorMiddleware } from "./errorMiddleware.js";
+app.use(errorMiddleware);
