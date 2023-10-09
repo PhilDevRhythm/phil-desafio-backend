@@ -1,4 +1,7 @@
 import { Router } from "express";
+import { loggerStart } from "../log4js.js";
+
+loggerStart()
 
 import userRouter from "./userRouter.js";
 import prodRouter from "./prodRouter.js";

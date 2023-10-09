@@ -38,25 +38,28 @@ app.listen(process.env.PORT, () => {
 import cluster from "cluster";
 import { cpus } from "os";
 
-const numCPUS = cpus().length;
-console.log(numCPUS);
 
-if (cluster.isPrimary) {
-  // proceso padre
-  console.log(`nucleos--> ${numCPUS}`);
-  console.log(`PID MASTER--> ${process.pid}`);
+// SCALABILITY SETTINGS
 
-  for (let index = 0; index < numCPUS; index++) {
-    cluster.fork();
-  }
+// const numCPUS = cpus().length;
+// console.log(numCPUS);
 
-  cluster.on("exit", (worker, code) => {
-    console.log(`worker ${worker.process.id} exited with code ${code}`);
-    cluster.fork();
-  });
-  // proceso hijo
-} else {
-  // const app = express();
+// if (cluster.isPrimary) {
+//   // proceso padre
+//   console.log(`nucleos--> ${numCPUS}`);
+//   console.log(`PID MASTER--> ${process.pid}`);
+
+//   for (let index = 0; index < numCPUS; index++) {
+//     cluster.fork();
+//   }
+
+//   cluster.on("exit", (worker, code) => {
+//     console.log(`worker ${worker.process.id} exited with code ${code}`);
+//     cluster.fork();
+//   });
+//   // proceso hijo
+// } else {
+//   // const app = express();
 
   app
     .engine("handlebars", handlebars.engine())
@@ -205,4 +208,4 @@ if (cluster.isPrimary) {
   // USAR PASSPORT SESSION ABAJO CON SESSION ACTIVO
   app.use(passport.session());
   app.use(passport.initialize());
-}
+// }
