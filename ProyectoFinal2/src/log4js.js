@@ -8,10 +8,12 @@ export const loggerStart = () => {
     },
     categories: {
       default: { appenders: ["fileAppender", "console"], level: "trace" },
+      dev: { appenders: ["fileAppender"], level: "warn" },
+      console: { appenders: ["console"], level: "fatal" },
     },
   });
 
-  const logger = log4js.getLogger();
+  const logger = log4js.getLogger("default");
 
   logger.trace("Log Nivel 1");
   logger.debug("Error Debug Nivel 2");
