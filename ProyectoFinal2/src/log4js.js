@@ -9,12 +9,13 @@ export const loggerStart = () => {
       default: { appenders: ["fileAppender"], level: "trace" },
     },
   });
-};
-const logger = log4js.getLogger();
 
-logger.trace("Log Nivel 1");
-logger.debug("Error Debug Nivel 2");
-logger.info("Error Info Nivel 3");
-logger.warn("Error Alerta Nivel 4");
-logger.error("Error grave Nivel 5");
-logger.fatal("Error Fatal Nivel 6");
+  const logger = log4js.getLogger();
+
+  logger.trace("Log Nivel 1");
+  logger.debug("Error Debug Nivel 2");
+  logger.info("Error Info Nivel 3");
+  logger.warn("Error Alerta Nivel 4");
+  logger.error("Error grave Nivel 5");
+  logger.fatal("Error Fatal Nivel 6");
+};
