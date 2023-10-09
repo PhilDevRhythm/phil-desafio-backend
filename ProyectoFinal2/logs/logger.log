@@ -10,3 +10,87 @@
 [2023-10-09T14:58:25.166] [WARN] default - Error Alerta Nivel 4
 [2023-10-09T14:58:25.166] [ERROR] default - Error grave Nivel 5
 [2023-10-09T14:58:25.166] [FATAL] default - Error Fatal Nivel 6
+[2023-10-09T15:01:51.904] [TRACE] default - Log Nivel 1
+[2023-10-09T15:01:51.906] [DEBUG] default - Error Debug Nivel 2
+[2023-10-09T15:01:51.906] [INFO] default - Error Info Nivel 3
+[2023-10-09T15:01:51.906] [WARN] default - Error Alerta Nivel 4
+[2023-10-09T15:01:51.906] [ERROR] default - Error grave Nivel 5
+[2023-10-09T15:01:51.906] [FATAL] default - Error Fatal Nivel 6
+[2023-10-09T15:01:55.733] [TRACE] default - Log Nivel 1
+[2023-10-09T15:01:55.734] [DEBUG] default - Error Debug Nivel 2
+[2023-10-09T15:01:55.734] [INFO] default - Error Info Nivel 3
+[2023-10-09T15:01:55.734] [WARN] default - Error Alerta Nivel 4
+[2023-10-09T15:01:55.734] [ERROR] default - Error grave Nivel 5
+[2023-10-09T15:01:55.734] [FATAL] default - Error Fatal Nivel 6
+[2023-10-09T15:01:57.939] [TRACE] default - Log Nivel 1
+[2023-10-09T15:01:57.940] [DEBUG] default - Error Debug Nivel 2
+[2023-10-09T15:01:57.940] [INFO] default - Error Info Nivel 3
+[2023-10-09T15:01:57.940] [WARN] default - Error Alerta Nivel 4
+[2023-10-09T15:01:57.940] [ERROR] default - Error grave Nivel 5
+[2023-10-09T15:01:57.940] [FATAL] default - Error Fatal Nivel 6
+[2023-10-09T15:02:09.908] [TRACE] default - Log Nivel 1
+[2023-10-09T15:02:09.909] [DEBUG] default - Error Debug Nivel 2
+[2023-10-09T15:02:09.909] [INFO] default - Error Info Nivel 3
+[2023-10-09T15:02:09.909] [WARN] default - Error Alerta Nivel 4
+[2023-10-09T15:02:09.910] [ERROR] default - Error grave Nivel 5
+[2023-10-09T15:02:09.910] [FATAL] default - Error Fatal Nivel 6
+[2023-10-09T15:02:13.436] [TRACE] default - Log Nivel 1
+[2023-10-09T15:02:13.438] [DEBUG] default - Error Debug Nivel 2
+[2023-10-09T15:02:13.439] [INFO] default - Error Info Nivel 3
+[2023-10-09T15:02:13.440] [WARN] default - Error Alerta Nivel 4
+[2023-10-09T15:02:13.440] [ERROR] default - Error grave Nivel 5
+[2023-10-09T15:02:13.441] [FATAL] default - Error Fatal Nivel 6
+[2023-10-09T15:02:16.130] [TRACE] default - Log Nivel 1
+[2023-10-09T15:02:16.132] [DEBUG] default - Error Debug Nivel 2
+[2023-10-09T15:02:16.132] [INFO] default - Error Info Nivel 3
+[2023-10-09T15:02:16.133] [WARN] default - Error Alerta Nivel 4
+[2023-10-09T15:02:16.134] [ERROR] default - Error grave Nivel 5
+[2023-10-09T15:02:16.135] [FATAL] default - Error Fatal Nivel 6
+[2023-10-09T15:02:21.053] [TRACE] default - Log Nivel 1
+[2023-10-09T15:02:21.055] [DEBUG] default - Error Debug Nivel 2
+[2023-10-09T15:02:21.056] [INFO] default - Error Info Nivel 3
+[2023-10-09T15:02:21.057] [WARN] default - Error Alerta Nivel 4
+[2023-10-09T15:02:21.058] [ERROR] default - Error grave Nivel 5
+[2023-10-09T15:02:21.058] [FATAL] default - Error Fatal Nivel 6
+[2023-10-09T15:02:53.718] [TRACE] default - Log Nivel 1
+[2023-10-09T15:02:53.720] [DEBUG] default - Error Debug Nivel 2
+[2023-10-09T15:02:53.720] [INFO] default - Error Info Nivel 3
+[2023-10-09T15:02:53.721] [WARN] default - Error Alerta Nivel 4
+[2023-10-09T15:02:53.722] [ERROR] default - Error grave Nivel 5
+[2023-10-09T15:02:53.723] [FATAL] default - Error Fatal Nivel 6
+[2023-10-09T15:04:52.917] [TRACE] default - Log Nivel 1
+[2023-10-09T15:04:52.962] [TRACE] default - Log Nivel 1
+[2023-10-09T15:04:52.921] [DEBUG] default - Error Debug Nivel 2
+[2023-10-09T15:04:52.962] [DEBUG] default - Error Debug Nivel 2
+[2023-10-09T15:04:52.922] [INFO] default - Error Info Nivel 3
+[2023-10-09T15:04:52.963] [INFO] default - Error Info Nivel 3
+[2023-10-09T15:04:52.923] [WARN] default - Error Alerta Nivel 4
+[2023-10-09T15:04:52.964] [WARN] default - Error Alerta Nivel 4
+[2023-10-09T15:04:52.923] [ERROR] default - Error grave Nivel 5
+[2023-10-09T15:04:52.965] [ERROR] default - Error grave Nivel 5
+[2023-10-09T15:04:52.924] [FATAL] default - Error Fatal Nivel 6
+[2023-10-09T15:04:52.965] [FATAL] default - Error Fatal Nivel 6
+[2023-10-09T15:04:55.303] [TRACE] default - Log Nivel 1
+[2023-10-09T15:04:55.343] [TRACE] default - Log Nivel 1
+[2023-10-09T15:04:55.305] [DEBUG] default - Error Debug Nivel 2
+[2023-10-09T15:04:55.344] [DEBUG] default - Error Debug Nivel 2
+[2023-10-09T15:04:55.306] [INFO] default - Error Info Nivel 3
+[2023-10-09T15:04:55.345] [INFO] default - Error Info Nivel 3
+[2023-10-09T15:04:55.306] [WARN] default - Error Alerta Nivel 4
+[2023-10-09T15:04:55.345] [WARN] default - Error Alerta Nivel 4
+[2023-10-09T15:04:55.307] [ERROR] default - Error grave Nivel 5
+[2023-10-09T15:04:55.346] [ERROR] default - Error grave Nivel 5
+[2023-10-09T15:04:55.307] [FATAL] default - Error Fatal Nivel 6
+[2023-10-09T15:04:55.346] [FATAL] default - Error Fatal Nivel 6
+[2023-10-09T15:05:04.294] [TRACE] default - Log Nivel 1
+[2023-10-09T15:05:04.340] [TRACE] default - Log Nivel 1
+[2023-10-09T15:05:04.297] [DEBUG] default - Error Debug Nivel 2
+[2023-10-09T15:05:04.341] [DEBUG] default - Error Debug Nivel 2
+[2023-10-09T15:05:04.298] [INFO] default - Error Info Nivel 3
+[2023-10-09T15:05:04.342] [INFO] default - Error Info Nivel 3
+[2023-10-09T15:05:04.299] [WARN] default - Error Alerta Nivel 4
+[2023-10-09T15:05:04.343] [WARN] default - Error Alerta Nivel 4
+[2023-10-09T15:05:04.299] [ERROR] default - Error grave Nivel 5
+[2023-10-09T15:05:04.343] [ERROR] default - Error grave Nivel 5
+[2023-10-09T15:05:04.300] [FATAL] default - Error Fatal Nivel 6
+[2023-10-09T15:05:04.343] [FATAL] default - Error Fatal Nivel 6

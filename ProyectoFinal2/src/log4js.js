@@ -4,9 +4,10 @@ export const loggerStart = () => {
   log4js.configure({
     appenders: {
       fileAppender: { type: "file", filename: "./logs/logger.log" },
+      console: { type: "console" },
     },
     categories: {
-      default: { appenders: ["fileAppender"], level: "trace" },
+      default: { appenders: ["fileAppender", "console"], level: "trace" },
     },
   });
 
