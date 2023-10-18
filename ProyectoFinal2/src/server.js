@@ -6,10 +6,15 @@ import cartRouter from "./routes/cartRouter.js";
 import viewsRouter from "./routes/viewsRouter.js";
 import MainRouter from "./routes/index.js";
 
+import { info } from "./docs/info.js";
+
+import swaggerUI from 'swagger-ui-express';
+import swaggerJSDoc from 'swagger-jsdoc'; 
+
 import helmet from "helmet";
 
 import { loggerStart } from "./log4js.js";
-loggerStart();
+// loggerStart(); en el final esta presente
 
 const mainRouter = new MainRouter();
 
@@ -217,3 +222,8 @@ app.use(passport.initialize());
 loggerStart();
 
 // }
+
+// DOCUMENTATION
+
+const specs = swaggerJSDoc(info);
+app.use("/docs", swaggerUI.serve, swaggerUI.setup(specs));
