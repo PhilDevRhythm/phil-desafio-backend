@@ -15,17 +15,17 @@ import {
   logout,
 } from "../controllers/viewsController.js";
 
-router.get("/users/login", login);
-router.get("/users/register", register);
-router.get("/users/errorLogin", errorLogin);
-router.get("/users/errorRegister", errorRegister);
-router.get("/users/profile", profile);
-router.get("/users/logout", logout);
+router.get("/api/users/login", login);
+router.get("/api/users/register", register);
+router.get("/api/users/errorLogin", errorLogin);
+router.get("/api/users/errorRegister", errorRegister);
+router.get("/api/users/profile", profile);
+router.get("/api/users/logout", logout);
 router.get("/", login);
 
 // PRODUCTS VIEWS
 
-router.get("products" && "/:cartId", async (req, res) => {
+router.get("products" && "/api/:cartId", async (req, res) => {
   try {
     const { page } = req.query;
 
@@ -60,7 +60,7 @@ router.get("products" && "/:cartId", async (req, res) => {
 
 // CART VIEWS
 
-router.get("/:cartId", async (req, res) => {
+router.get("/api/:cartId", async (req, res) => {
   try {
     const { cartId } = req.params;
 

@@ -6,6 +6,8 @@ import cartRouter from "./routes/cartRouter.js";
 import viewsRouter from "./routes/viewsRouter.js";
 import MainRouter from "./routes/index.js";
 
+import helmet from "helmet";
+
 import { loggerStart } from "./log4js.js";
 loggerStart();
 
@@ -67,6 +69,7 @@ app
   .engine("handlebars", handlebars.engine())
   .set("views", __dirname + "/views")
   .set("view engine", "handlebars")
+  // .use(helmet())
 
   // app.use("/", viewsRouter);
 

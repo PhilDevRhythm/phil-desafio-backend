@@ -54,7 +54,7 @@ export const login = (req, res) => {
   );
   if (index < 0) res.json({ error: "User not found" });
   else {
-    const user = users[index];
+    const user = user[index];
     req.session.info = {
       loggedIn: true,
       count: 1,
