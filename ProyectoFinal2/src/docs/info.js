@@ -2,9 +2,9 @@ export const info = {
     definition: {
         openapi: '3.0.0',   
         info: {
-            title: 'API Ecommerce',
-            version: '1.0.0',
-            description: 'Tecnologías utilizadas: Node, Express, MongoDB'
+            title: 'Bazar de barrio',
+            version: '0.0.9b',
+            description: 'Sitio web de compras de bazar de barrio - Tecnologías utilizadas: Node, Express, MongoDB'
         },
         servers: [  
             {
