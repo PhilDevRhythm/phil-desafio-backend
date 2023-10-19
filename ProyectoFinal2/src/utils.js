@@ -40,3 +40,4 @@ export const generateProduct = () => {
     stock: faker.number.int(),
   };
 };
+

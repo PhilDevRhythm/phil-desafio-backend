@@ -1,0 +1,44 @@
+paths: 
+  /api/products:
+    post:
+      tags: 
+      - ProductsTag
+      summary: Registro de producto
+      requestbody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/parameters/schemas/ProductSpecs'
+        required: true
+      responses:
+        200:
+          description:  Registro de productos exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Products/registeredNew'
+        501:
+          description: Error de servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Products/validationError'
+
+        404:
+          description: Error de schema
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Products/validationError'
+    get:
+      tags:
+      - ProductsGet
+      summary: Obtener productos
+      requestbody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/parameters/schemas/ProductSpecs'
+
+    
+   
