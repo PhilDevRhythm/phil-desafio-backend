@@ -16,20 +16,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Products/registeredNew'
+                $ref: '#/components/parameters/schemas/Products/registeredNew'
         501:
           description: Error de servidor
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Products/validationError'
+                $ref: '#/components/parameters/schemas/Products/validationError'
 
         404:
           description: Error de schema
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Products/validationError'
+                $ref: '#/components/parameters/schemas/Products/validationError'
     get:
       tags:
       - ProductsGet
