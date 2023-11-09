@@ -10,8 +10,8 @@ import MainRouter from "./routes/index.js";
 
 import { info } from "./docs/info.js";
 
-import swaggerUI from 'swagger-ui-express';
-import swaggerJSDoc from 'swagger-jsdoc'; 
+import swaggerUI from "swagger-ui-express";
+import swaggerJSDoc from "swagger-jsdoc";
 
 import helmet from "helmet";
 
@@ -103,11 +103,11 @@ const mongoStoreOptions = {
   store: MongoStore.create({
     mongoUrl: process.env.MONGO_LOCAL_URL,
     crypto: {
-      secret: "1234",
+      secret: process.env.MONGO_LOCAL_SECRET,
     },
     reapInterval: 30,
   }),
-  secret: "1234",
+  secret: process.env.MONGO_LOCAL_SECRET,
   resave: false,
   saveUninitilized: false,
   cookie: {
@@ -229,4 +229,4 @@ loggerStart();
 // DOCUMENTATION
 
 const specs = swaggerJSDoc(info);
-app.use("/docs", swaggerUI.serve, swaggerUI.setup(specs));  
+app.use("/docs", swaggerUI.serve, swaggerUI.setup(specs));

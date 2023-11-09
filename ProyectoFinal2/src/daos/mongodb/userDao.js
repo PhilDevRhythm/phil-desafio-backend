@@ -1,5 +1,5 @@
 import { userModel } from "./models/userModel.js";
-import { createHash, isValidPassword } from "../../utils.js";
+import { createHash, isValidPassword } from "../utils.js";
 import MongoDao from "./mongoDao.js";
 
 export default class UserDao extends MongoDao {

@@ -2,7 +2,7 @@ paths:
   /api/products:
     post:
       tags: 
-      - ProductsTag
+      - ProductsRegister
       summary: Registro de producto
       requestbody:
         content:
@@ -30,15 +30,37 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/parameters/schemas/Products/validationError'
+  /api/products/getProducts:              
     get:
       tags:
-      - ProductsGet
+      - getProducts
       summary: Obtener productos
       requestbody:
         content:
           application/json:
             schema:
               $ref: '#/components/parameters/schemas/ProductSpecs'
+          required: true
+      responses:
+        201:
+          description:  Registro de productos exitosa, generará un id automatico e unico.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/parameters/schemas/Products/registeredNew'
+        502:
+          description: Error de servidor - Hubo una desconexion en el camino al producto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/parameters/schemas/Products/validationError'
+
+        404:
+          description: Error de schema
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/parameters/schemas/Products/validationError'      
 
     
    

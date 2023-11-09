@@ -1,5 +1,10 @@
 components:
   parameters:
+    rundev:
+      name: Run development server
+      description: Run development
+      required: true
+
     schemas:
       Products:
         registeredNew: 

@@ -1,8 +1,6 @@
 import { connect } from "mongoose";
 import "dotenv/config";
 
-
-
 // try {
 //   await connect(connectionString);
 //   console.log("conectado a Mongo DB");
