@@ -20,12 +20,12 @@ export const loginUser = async (req, res) => {
     const user = await userDao.loginUser(req.body);
 
     if (user) {
-      req.session.email = email;
-      req.session.password = password;
-      req.session.isGithub = isGithub;
-      req.session.last_name = last_name;
-      req.session.first_name = first_name;
-      req.session.age = age;
+      // req.session.email = email;
+      // req.session.password = password;
+      // req.session.isGithub = isGithub;
+      // req.session.last_name = last_name;
+      // req.session.first_name = first_name;
+      // req.session.age = age;
 
       res.render("profile", {
         first_name: first_name,

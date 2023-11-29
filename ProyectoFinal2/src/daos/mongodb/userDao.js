@@ -1,5 +1,5 @@
 import { userModel } from "./models/userModel.js";
-import { createHash, isValidPassword } from "../utils.js";
+import { createHash, isValidPassword } from "../../utils.js";
 import MongoDao from "./mongoDao.js";
 
 export default class UserDao extends MongoDao {
@@ -32,8 +32,8 @@ export default class UserDao extends MongoDao {
       const { email, password } = user;
       const userExist = await userModel.findOne({ email });
       if (userExist) {
-        console.log(user.password);
-        console.log(user);
+        // console.log(user.password);
+        // console.log(user);
         console.log(userExist);
         return isValidPassword(userExist, password) ? userExist : false;
       } else return false;

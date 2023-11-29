@@ -44,7 +44,7 @@ import {
 } from "../controllers/userController.js";
 import validateLogin from "../middlewares/validateLogin.js";
 
-router.post("/login", login);
+router.post("/login", loginUser);
 router.get("/info", validateLogin, infoSession);
 router.get("/admin-dashboard", validateLogin, visit);
 router.post("/logout", logout);

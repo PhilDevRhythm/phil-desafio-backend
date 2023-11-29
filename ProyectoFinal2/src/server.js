@@ -140,7 +140,8 @@ app
     } catch {}
   })
 
-  .use(cookieParser())
+  .use(cookieParser("secret"))
+  
   .use(session(mongoStoreOptions))
 
   .use("/", viewsRouter);
